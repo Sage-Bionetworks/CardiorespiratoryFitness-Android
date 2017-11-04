@@ -76,8 +76,6 @@ public class CrfDataProvider extends BridgeDataProvider {
      */
     public void getCrfActivities(final CrfActivitiesListener listener) {
 
-
-
         if (!CrfPrefs.getInstance().hasFirstSignInDate()) {
             Log.v(LOG_TAG, "No sign in date detected");
             // getCrfActivities method will be called again when sign in date is found, so return here
@@ -95,7 +93,7 @@ public class CrfDataProvider extends BridgeDataProvider {
 
                     StringBuilder debugActivityList = new StringBuilder();
                     for (ScheduledActivity activity : activityList.getItems()) {
-                        if (activity.getPersistent() == false) {
+                        if (!activity.getPersistent()) {
                             if (activity.getActivity().getTask() == null) {
                                 debugActivityList.append(activity.getActivity().getSurvey().getIdentifier());
                             } else {
@@ -283,24 +281,24 @@ public class CrfDataProvider extends BridgeDataProvider {
         DateTime newDateTime = dateTime.plusDays(days).plusHours(hours);
 
         // TODO: do this without string manipulation somehow and also add hours/mins based on what was lost
-        String oldDateTimeStr = CrfPrefs.FORMATTER.print(dateTime);
-        int oldOffsetStartIdx = oldDateTimeStr.lastIndexOf("-");
-        String oldOffsetStr = oldDateTimeStr.substring(oldOffsetStartIdx, oldDateTimeStr.length());
-
-        String newDateTimeStr = CrfPrefs.FORMATTER.print(newDateTime);
-        int newOffsetStartIdx = newDateTimeStr.lastIndexOf("-");
-        String newOffsetStr = newDateTimeStr.substring(newOffsetStartIdx, newDateTimeStr.length());
+//        String oldDateTimeStr = CrfPrefs.FORMATTER.print(dateTime);
+//        int oldOffsetStartIdx = oldDateTimeStr.lastIndexOf("-");
+//        String oldOffsetStr = oldDateTimeStr.substring(oldOffsetStartIdx, oldDateTimeStr.length());
+//
+//        String newDateTimeStr = CrfPrefs.FORMATTER.print(newDateTime);
+//        int newOffsetStartIdx = newDateTimeStr.lastIndexOf("-");
+//        String newOffsetStr = newDateTimeStr.substring(newOffsetStartIdx, newDateTimeStr.length());
 
         // Bridge server does not like when we request date ranges with different time zones
         // Unfortunately, during daylight savings, DateTime automatically switches time zones
         // when we use the method "plusDays", so we must correct that if we determine it happened
-        if (!oldOffsetStr.equals(newOffsetStr)) {
-            // We had a time zone change!
-            Log.d(LOG_TAG, "Time zone change detected, correcting error");
-            String offsetCorrectDateTimeStr =
-                    newDateTimeStr.substring(0, newOffsetStartIdx) + oldOffsetStr;
-            newDateTime = CrfPrefs.FORMATTER.parseDateTime(offsetCorrectDateTimeStr);
-        }
+//        if (!oldOffsetStr.equals(newOffsetStr)) {
+//            // We had a time zone change!
+//            Log.d(LOG_TAG, "Time zone change detected, correcting error");
+//            String offsetCorrectDateTimeStr =
+//                    newDateTimeStr.substring(0, newOffsetStartIdx) + oldOffsetStr;
+//            newDateTime = CrfPrefs.FORMATTER.parseDateTime(offsetCorrectDateTimeStr);
+//        }
 
         return newDateTime;
     }
