@@ -62,7 +62,7 @@ public class CrfActivitiesFragment extends ActivitiesFragment {
 
     private static final boolean USE_LEGACY_GET_ACTIVITIES = false;
     //private static final int DEBUG_BUILD_ACTIVITY_SUBARRAY_INDEX = -1;
-    private static final int DEBUG_BUILD_ACTIVITY_SUBARRAY_INDEX = 9;
+    private static final int DEBUG_BUILD_ACTIVITY_SUBARRAY_INDEX = 5;
 
     @Override
     public void fetchData() {
