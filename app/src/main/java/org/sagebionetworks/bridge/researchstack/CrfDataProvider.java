@@ -340,28 +340,12 @@ public class CrfDataProvider extends BridgeDataProvider {
      * @return
      */
     DateTime addTime(DateTime dateTime, int days, int hours) {
+        // TODO: Bridge server does not like when we request date ranges with different time zones
+        // TODO: Unfortunately, during daylight savings, DateTime automatically switches time zones
+        // TODO: when we use the method "plusDays",
+        // TODO: iOS solves this by doing multiple calls to get activities,
+        // TODO: but I think correct the two times to have the same timezone would be a better solution for CRF
         DateTime newDateTime = dateTime.plusDays(days).plusHours(hours);
-
-        // TODO: do this without string manipulation somehow and also add hours/mins based on what was lost
-//        String oldDateTimeStr = CrfPrefs.FORMATTER.print(dateTime);
-//        int oldOffsetStartIdx = oldDateTimeStr.lastIndexOf("-");
-//        String oldOffsetStr = oldDateTimeStr.substring(oldOffsetStartIdx, oldDateTimeStr.length());
-//
-//        String newDateTimeStr = CrfPrefs.FORMATTER.print(newDateTime);
-//        int newOffsetStartIdx = newDateTimeStr.lastIndexOf("-");
-//        String newOffsetStr = newDateTimeStr.substring(newOffsetStartIdx, newDateTimeStr.length());
-
-        // Bridge server does not like when we request date ranges with different time zones
-        // Unfortunately, during daylight savings, DateTime automatically switches time zones
-        // when we use the method "plusDays", so we must correct that if we determine it happened
-//        if (!oldOffsetStr.equals(newOffsetStr)) {
-//            // We had a time zone change!
-//            Log.d(LOG_TAG, "Time zone change detected, correcting error");
-//            String offsetCorrectDateTimeStr =
-//                    newDateTimeStr.substring(0, newOffsetStartIdx) + oldOffsetStr;
-//            newDateTime = CrfPrefs.FORMATTER.parseDateTime(offsetCorrectDateTimeStr);
-//        }
-
         return newDateTime;
     }
 
