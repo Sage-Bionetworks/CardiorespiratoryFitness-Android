@@ -152,7 +152,7 @@ public class CrfActivitiesFragment extends ActivitiesFragment {
 
         for (SchedulesAndTasksModel.ScheduleModel scheduleModel : model.schedules) {
             for (SchedulesAndTasksModel.TaskScheduleModel task : scheduleModel.tasks) {
-                if (task.taskID != null && !hiddenActivityIdentifiers().contains(task.taskID)) {
+                if (task.taskID != null && !HIDDEN_TASK_IDS.contains(task.taskID)) {
                     tasks.add(task);
                 }
             }
@@ -166,17 +166,17 @@ public class CrfActivitiesFragment extends ActivitiesFragment {
      */
     public List<ScheduledActivity> processResults(ScheduledActivityListV4 activityList) {
         if (activityList == null || activityList.getItems() == null) {
-            return Lists.newArrayList();
+            return new ArrayList<>();
         }
         List<ScheduledActivity> activities = new ArrayList<>(activityList.getItems());
 
         List<ScheduledActivity> finalActivities = new ArrayList<>();
-        // For now, the filter is only on whatever identifiers are in hiddenActivityIdentifiers()
+        // For now, the filter is only on whatever identifiers are in HIDDEN_TASK_IDS
         for (ScheduledActivity activity : activities) {
             if (activity.getActivity() != null &&
                     activity.getActivity().getTask() != null &&
                     activity.getActivity().getTask().getIdentifier() != null) {
-                if (!hiddenActivityIdentifiers().contains(activity.getActivity().getTask().getIdentifier())) {
+                if (!HIDDEN_TASK_IDS.contains(activity.getActivity().getTask().getIdentifier())) {
                     finalActivities.add(activity);
                 }
             } else {
@@ -184,7 +184,7 @@ public class CrfActivitiesFragment extends ActivitiesFragment {
             }
         }
 
-        return activities;
+        return finalActivities;
     }
 
     private SchedulesAndTasksModel translateActivities(@NonNull List<ScheduledActivity> activityList) {
@@ -229,13 +229,5 @@ public class CrfActivitiesFragment extends ActivitiesFragment {
         }
 
         return model;
-    }
-
-    public List<String> hiddenActivityIdentifiers() {
-        String [] hideTheseActivities = new String [] {
-                CrfDataProvider.CLINIC1,
-                CrfDataProvider.CLINIC2};
-
-        return new ArrayList<>(Arrays.asList(hideTheseActivities));
     }
 }
