@@ -42,6 +42,8 @@ import rx.functions.Action1;
  */
 
 public class CrfDataProvider extends BridgeDataProvider {
+    public static final String CLINIC1 = "clinic1";
+    public static final String CLINIC2 = "clinic2";
 
     private static final String LOG_TAG = CrfDataProvider.class.getCanonicalName();
 
