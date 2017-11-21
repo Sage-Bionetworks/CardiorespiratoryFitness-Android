@@ -37,6 +37,7 @@ import org.researchstack.backbone.ui.ViewTaskActivity;
 import org.researchstack.backbone.utils.LogExt;
 import org.researchstack.skin.ui.adapter.TaskAdapter;
 import org.researchstack.skin.ui.fragment.ActivitiesFragment;
+import org.researchstack.skin.ui.views.DividerItemDecoration;
 import org.sagebase.crf.helper.CrfDateHelper;
 import org.sagebase.crf.helper.CrfScheduleHelper;
 import org.sagebase.crf.view.CrfFilterableActivityDisplay;
@@ -161,12 +162,15 @@ public class CrfActivitiesFragment extends ActivitiesFragment implements CrfFilt
         return new CrfTaskAdapter(getActivity());
     }
 
+    @Override
     protected void setUpAdapter() {
-        recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getContext()));
-//        recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(),
-//                DividerItemDecoration.VERTICAL_LIST,
-//                0,
-//                false));
+        LinearLayoutManager lm = new LinearLayoutManager(recyclerView.getContext());
+        lm.setStackFromEnd(true);
+        recyclerView.setLayoutManager(lm);
+        recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(),
+                DividerItemDecoration.VERTICAL_LIST,
+                0,
+                false));
 
         fetchData();
     }
