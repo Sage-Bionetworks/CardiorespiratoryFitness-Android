@@ -9,6 +9,7 @@
     <color name="rsb_colorPrimaryDark">@color/colorPrimaryDark</color>
     <color name="rsb_colorAccent">@color/colorAccent</color>
 
+    <color name="transparent">#00000000</color>
     <color name="white">#FFFFFF</color>
     <color name="gray">#AAAAAA</color>
     <color name="purple">#5B3EAD</color>
@@ -47,5 +48,6 @@
     <color name="whiteButtonShadow">#F5F5F5</color>
     <color name="whiteButtonShadow65">#A6F5F5F5</color>
     <color name="darkGrayText">#414859</color>
+    <color name="silver">#E1E5E6</color>
 
 </resources>

@@ -24,14 +24,12 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.TextView;
 
-import org.researchstack.backbone.result.Result;
 import org.researchstack.backbone.result.StepResult;
 import org.researchstack.backbone.step.Step;
 import org.researchstack.backbone.step.active.recorder.LocationRecorder;
 import org.researchstack.backbone.step.active.recorder.Recorder;
 import org.researchstack.backbone.ui.step.layout.ActiveStepLayout;
 import org.researchstack.backbone.ui.views.ArcDrawable;
-import org.researchstack.backbone.utils.StepResultHelper;
 import org.sagebase.crf.view.CrfTaskStatusBarManipulator;
 import org.sagebionetworks.research.crf.R;
 
@@ -88,7 +86,7 @@ public class Crf12MinWalkingStepLayout extends ActiveStepLayout implements CrfTa
         long sec = secondsLeft % 60;
         crfCountdownText.setText(String.format(Locale.getDefault(), "%02d:%02d", min, sec));
 
-        float progress = 1.0f - ((float)secondsLeft - (float)activeStep.getStepDuration());
+        float progress = 1.0f - ((float)secondsLeft / (float)activeStep.getStepDuration());
         arcDrawable.setSweepAngle(ArcDrawable.FULL_SWEEPING_ANGLE * progress);
     }
 
@@ -133,9 +131,12 @@ public class Crf12MinWalkingStepLayout extends ActiveStepLayout implements CrfTa
 
         arcDrawableContainer = findViewById(R.id.crf_arc_drawable_container);
         arcDrawable = new ArcDrawable();
+        arcDrawable.setSweepAngle(0.0f);
         arcDrawable.setColor(ResourcesCompat.getColor(getResources(), R.color.greenyBlue, null));
         arcDrawable.setArchWidth(getResources().getDimensionPixelOffset(R.dimen.crf_ard_drawable_width));
         arcDrawable.setDirection(Path.Direction.CW);
+        arcDrawable.setIncludeFullCirclePreview(true);
+        arcDrawable.setFullCirclePreviewColor(ResourcesCompat.getColor(getResources(), R.color.silver, null));
         arcDrawableContainer.setBackground(arcDrawable);
     }
 

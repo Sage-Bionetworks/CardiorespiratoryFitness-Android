@@ -140,11 +140,17 @@ public class CrfHeartRateStepLayout extends ActiveStepLayout implements
         heartRateNumber = findViewById(R.id.crf_heart_rate_number);
 
         arcDrawableContainer = findViewById(R.id.crf_arc_drawable_container);
+        // This should make a gray ring around the camera feed, but it is not working
+        arcDrawableContainer.setBackgroundResource(R.color.transparent);
+        arcDrawableContainer.setVisibility(View.VISIBLE);
         arcDrawableView = findViewById(R.id.crf_arc_drawable);
         arcDrawable = new ArcDrawable();
+        arcDrawable.setSweepAngle(0.0f);
         arcDrawable.setColor(ResourcesCompat.getColor(getResources(), R.color.greenyBlue, null));
         arcDrawable.setArchWidth(getResources().getDimensionPixelOffset(R.dimen.crf_ard_drawable_width));
         arcDrawable.setDirection(Path.Direction.CW);
+        arcDrawable.setIncludeFullCirclePreview(true);
+        arcDrawable.setFullCirclePreviewColor(ResourcesCompat.getColor(getResources(), R.color.silver, null));
         arcDrawableView.setBackground(arcDrawable);
 
         nextButton = findViewById(R.id.crf_next_button);
@@ -198,7 +204,7 @@ public class CrfHeartRateStepLayout extends ActiveStepLayout implements
         hasDetectedStart = true;
         heartImageView.setVisibility(View.VISIBLE);
         heartRateTextContainer.setVisibility(View.VISIBLE);
-        arcDrawableContainer.setVisibility(View.VISIBLE);
+        arcDrawableContainer.setBackgroundResource(R.color.white);
         arcDrawable.setSweepAngle(0.0f);
         heartRateNumber.setText("--");
         startAnimation();  // this will trigger a restart of the timer

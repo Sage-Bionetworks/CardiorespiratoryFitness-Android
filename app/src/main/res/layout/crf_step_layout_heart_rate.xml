@@ -22,21 +22,31 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        style="@style/TextAppearance.Crf.SubHeader"
-        android:id="@+id/crf_heart_rate_title"
+    <!-- minHeight fixes bug where camera frame was shifting up and down with different titles -->
+    <LinearLayout
+        android:id="@+id/crf_heart_rate_title_container"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:minHeight="180dp"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:paddingTop="?attr/actionBarSize"
-        android:gravity="center_horizontal"
-        android:layout_margin="@dimen/rsb_padding_large"/>
+        android:layout_centerHorizontal="true">
+
+        <TextView
+            style="@style/TextAppearance.Crf.SubHeader"
+            android:id="@+id/crf_heart_rate_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="?attr/actionBarSize"
+            android:layout_gravity="center"
+            android:gravity="center_horizontal"
+            android:layout_margin="@dimen/rsb_padding_small"/>
+
+    </LinearLayout>
 
     <FrameLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/crf_heart_rate_title"
+        android:layout_below="@id/crf_heart_rate_title_container"
         android:layout_centerHorizontal="true">
 
         <org.sagebase.crf.camera.CameraSourcePreview
@@ -50,7 +60,6 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_gravity="center"
-            android:visibility="gone"
             android:background="@color/white">
 
             <View

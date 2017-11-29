@@ -163,6 +163,7 @@ public class CrfInstructionStepLayout extends InstructionStepLayout implements
         }
         nextButton.setOnClickListener(this::goForwardClicked);
         if (customButton != null) {
+            customButton.setEnabled(true);
             customButton.setOnClickListener(this::goForwardClicked);
         }
         if (crfInstructionStep.backgroundColorRes != null) {
@@ -181,6 +182,9 @@ public class CrfInstructionStepLayout extends InstructionStepLayout implements
 
     public void goForwardClicked(View v) {
         nextButton.setEnabled(false);
+        if (customButton != null) {
+            customButton.setEnabled(false);
+        }
         onComplete();
     }
 
