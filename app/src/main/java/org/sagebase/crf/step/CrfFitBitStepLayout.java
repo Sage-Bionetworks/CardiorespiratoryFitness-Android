@@ -18,12 +18,22 @@
 package org.sagebase.crf.step;
 
 import android.content.Context;
+import android.support.annotation.VisibleForTesting;
 import android.util.AttributeSet;
 import android.view.View;
 
+import com.google.common.collect.Sets;
+
+import org.researchstack.backbone.DataProvider;
 import org.researchstack.backbone.result.StepResult;
 import org.researchstack.backbone.step.Step;
 import org.sagebase.crf.fitbit.FitbitManager;
+import org.sagebionetworks.bridge.android.manager.BridgeManagerProvider;
+import org.sagebionetworks.bridge.researchstack.BridgeDataProvider;
+import org.sagebionetworks.bridge.researchstack.CrfDataProvider;
+import org.sagebionetworks.research.crf.R;
+
+import java.util.Set;
 
 /**
  * Created by TheMDP on 11/28/17.
@@ -45,13 +55,29 @@ public class CrfFitBitStepLayout extends CrfInstructionStepLayout {
         super(context, attrs, defStyleAttr);
     }
 
-    public CrfFitBitStepLayout(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public CrfFitBitStepLayout(Context context, AttributeSet attrs, int defStyleAttr, int
+            defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
     }
 
     @Override
     public void initialize(Step step, StepResult result) {
+        if (!(DataProvider.getInstance() instanceof BridgeDataProvider)) {
+            throw new IllegalStateException("CrfClinicDataGroupsStepLayout only works with BridgeDataProvider");
+        }
+
+        BridgeDataProvider bridgeDataProvider = (BridgeDataProvider)DataProvider.getInstance();
+
+        Set<String> dataGroups = Sets.newHashSet(
+                bridgeDataProvider.getLocalDataGroups()
+        );
+
+        if(shouldAllowSkip(dataGroups)) {
+            step.setOptional(true);
+        }
+
         super.initialize(step, result);
+
         if (fitbitManager == null) {
             fitbitManager = new FitbitManager(getContext(), null);
         }
@@ -60,6 +86,16 @@ public class CrfFitBitStepLayout extends CrfInstructionStepLayout {
         if (fitbitManager.isAuthenticated()) {
             super.onComplete();
         }
+    }
+
+    @Override
+    public int getContentResourceId() {
+        return R.layout.crf_step_layout_fitbit;
+    }
+
+    @VisibleForTesting
+    static boolean shouldAllowSkip(Set<String> dataGroups) {
+        return !Sets.intersection(CrfDataProvider.TEST_DATA_GROUPS, dataGroups).isEmpty();
     }
 
     @Override

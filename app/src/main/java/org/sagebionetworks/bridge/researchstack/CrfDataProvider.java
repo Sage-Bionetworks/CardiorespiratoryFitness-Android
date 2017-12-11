@@ -50,9 +50,12 @@ public class CrfDataProvider extends BridgeDataProvider {
 
     public static final String CLINIC1 = "clinic1";
     public static final String CLINIC2 = "clinic2";
+    public static final String TEST_USER = "test_user";
+    public static final String UX_TESTER = "ux_tester";
 
-    public static final Set<String> HIDDEN_TASK_IDS = ImmutableSet.of(
-            CrfDataProvider.CLINIC1, CrfDataProvider.CLINIC2);
+    public static final Set<String> HIDDEN_TASK_IDS = ImmutableSet.of(CLINIC1, CLINIC2);
+    public static final Set<String> TEST_DATA_GROUPS = ImmutableSet.of(TEST_USER, UX_TESTER);
+
 
     public static final int STUDY_DURATION_IN_DAYS = 15;
 
@@ -140,8 +143,15 @@ public class CrfDataProvider extends BridgeDataProvider {
             logV("No sign in date detected");
             // getCrfActivities method will be called again when sign in date is found, so return
             // here
-            createOrFindFirstSignInDate(listener);
-            return;
+            if (getLocalDataGroups().contains(TEST_USER) &&
+                    !getLocalDataGroups().contains(UX_TESTER)) {
+                // sign in date is used to retrieve clinic schedules, which are based on sign-in
+                // ACTIVITY_TESTER receives persistent tasks, and has no clinic sign in date
+                getCrfPrefs().setFirstSignInDate(DateTime.now());
+            } else {
+                createOrFindFirstSignInDate(listener);
+                return;
+            }
         }
 
         DateTime firstSignInDate = getCrfPrefs().getFirstSignInDate();
@@ -154,14 +164,14 @@ public class CrfDataProvider extends BridgeDataProvider {
             logV("Raw Activities:");
             debugPrintActivities(activityList.getItems());
 
-            List<ScheduledActivity> fitleredActivities = activityList.getItems();
+            List<ScheduledActivity> filteredActivities = activityList.getItems();
             if (performFiltering) {
-                fitleredActivities = filterResults(activityList);
+                filteredActivities = filterResults(activityList);
                 logV("Filtered Activities:");
-                debugPrintActivities(fitleredActivities);
+                debugPrintActivities(filteredActivities);
             }
 
-            SchedulesAndTasksModel model = translateActivities(fitleredActivities);
+            SchedulesAndTasksModel model = translateActivities(filteredActivities);
 
             // Set reminders for CRF app
             if (weakContext != null && weakContext.get() != null) {
