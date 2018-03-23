@@ -64,6 +64,8 @@ public interface BpmRecorder {
     
     class BpmCalculator {
         
+        private static final Logger LOG = LoggerFactory.getLogger(BpmCalculator.class);
+        
         public enum TYPE {
             GREEN,
             RED
@@ -112,7 +114,6 @@ public interface BpmRecorder {
                 newType = TYPE.RED;
                 if (newType != currentType) {
                     beats++;
-                    // Log.d(TAG, "BEAT!! beats="+beats);
                 }
             } else if (imgAvg > rollingAverage) {
                 newType = TYPE.GREEN;
@@ -131,7 +132,12 @@ public interface BpmRecorder {
             
             double endTime = heartBeatSample.t;
             double totalTimeInSecs = (endTime - startTime) / 1000d;
-            Log.v("calculateBPM", "total time: " + totalTimeInSecs);
+            
+            if (LOG.isTraceEnabled()) {
+                LOG.trace("calculateBPM total time: {}", totalTimeInSecs);
+    
+            }
+            
             if (totalTimeInSecs >= 10) {
                 double beatsPerSecond = (beats / totalTimeInSecs);
                 int beatsPerMinute = (int) (beatsPerSecond * 60d);
@@ -142,9 +148,6 @@ public interface BpmRecorder {
                     return;
                 }
                 
-                // Log.d(TAG,
-                // "totalTimeInSecs="+totalTimeInSecs+" beats="+beats);
-    
                 if (beatsIndex == BEATS_ARRAY_SIZE) {
                     beatsIndex = 0;
                 }

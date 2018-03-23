@@ -18,7 +18,6 @@
 package org.sagebase.crf.step.active;
 
 import android.annotation.SuppressLint;
-import android.annotation.TargetApi;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.SurfaceTexture;
@@ -62,7 +61,6 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import rx.Observable;
 import rx.Single;
@@ -183,7 +181,6 @@ public class HeartRateCamera2Recorder extends Recorder {
                         
                             return createCaptureSessionObservable(cameraDevice, allSurfaces)
                                     .doOnNext(session -> {
-                                        LOG.debug("Starting media recorder");
                                         mediaRecorder.start();
                                     })
                                     .doOnNext(session ->
@@ -211,6 +208,7 @@ public class HeartRateCamera2Recorder extends Recorder {
                         s -> {
                             cameraCaptureSession = s;
                             doRepeatingRequest(s, surfacesNoMediaRecorder);
+                            setRecording(true);
                         }, t -> {
                             cameraCaptureSession = null;
                             recordingFailed(t);
@@ -247,8 +245,8 @@ public class HeartRateCamera2Recorder extends Recorder {
     
     @Override
     public void stop() {
-        subscriptions.unsubscribe();
         heartBeatJsonWriter.stop();
+        subscriptions.unsubscribe();
 
         if (mediaRecorderFile.exists()) {
             FileResult fileResult = new FileResult(fileResultIdentifier(), mediaRecorderFile, MP4_CONTENT_TYPE);
@@ -261,8 +259,9 @@ public class HeartRateCamera2Recorder extends Recorder {
 
     @Override
     public void cancel() {
-        subscriptions.unsubscribe();
         heartBeatJsonWriter.cancel();
+        subscriptions.unsubscribe();
+        
         if (mediaRecorderFile.exists()) {
             mediaRecorderFile.delete();
         }
@@ -322,11 +321,15 @@ public class HeartRateCamera2Recorder extends Recorder {
                 LOG.debug("Output formats: {}", outputFormats);
 
                 int[] inputFormats = new int[0];
-                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                     inputFormats = streamConfigurationMap.getInputFormats();
                 }
                 LOG.debug("Input formats: {}", inputFormats);
-
+    
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    manager.setTorchMode(cameraId, true);
+                }
+    
                 return cameraId;
             }
         } catch (CameraAccessException e) {
@@ -450,6 +453,7 @@ public class HeartRateCamera2Recorder extends Recorder {
     
     void doRepeatingRequest(@NonNull CameraCaptureSession session, @NonNull List<Surface> surfaces) {
         try {
+            
             LOG.debug("Attempting to create capture request");
             CaptureRequest.Builder requestBuilder = session.getDevice()
                     .createCaptureRequest(CameraDevice.TEMPLATE_RECORD);
@@ -477,10 +481,10 @@ public class HeartRateCamera2Recorder extends Recorder {
     
     
             CaptureRequest captureRequest = requestBuilder.build();
-            for (CaptureRequest.Key<?> k : captureRequest.getKeys()) {
-                Object value = captureRequest.get(k);
-                LOG.debug("Capture request Key: {}, value: {}", k, value);
-            }
+//            for (CaptureRequest.Key<?> k : captureRequest.getKeys()) {
+//                Object value = captureRequest.get(k);
+//                LOG.debug("Capture request Key: {}, value: {}", k, value);
+//            }
     
             session.setRepeatingRequest(captureRequest, null, null);
         } catch (CameraAccessException e) {
