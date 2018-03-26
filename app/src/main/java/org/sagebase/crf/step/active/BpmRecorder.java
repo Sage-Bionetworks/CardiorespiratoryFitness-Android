@@ -178,7 +178,7 @@ public interface BpmRecorder {
         
         private static final Logger LOG = LoggerFactory.getLogger(HeartBeatJsonWriter.class);
         
-        private static final int RED_INTENSITY_FACTOR_THRESHOLD = 3;
+        private static final float RED_INTENSITY_FACTOR_THRESHOLD = 2;
         private static final String TIMESTAMP_IN_SECONDS_KEY = "timestamp";
         private static final String HEART_RATE_KEY = "bpm_camera";
         private static final String HUE_KEY = "hue";
@@ -188,7 +188,7 @@ public interface BpmRecorder {
         private static final String GREEN_KEY = "green";
         private static final String BLUE_KEY = "blue";
         
-        private static final int INTELLIGENT_START_FRAMES_TO_PASS = 10;
+        private static final int INTELLIGENT_START_FRAMES_TO_PASS = 30;
         
         private final JsonObject mJsonObject = new JsonObject();
         
