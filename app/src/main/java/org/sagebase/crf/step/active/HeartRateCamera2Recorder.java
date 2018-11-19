@@ -61,6 +61,7 @@ import org.sagebase.crf.step.heartrate.BpmRecorder;
 import org.sagebase.crf.step.heartrate.camera_error.CameraState;
 import org.sagebase.crf.step.heartrate.confidence_error.ConfidenceState;
 import org.sagebase.crf.step.heartrate.pressure_error.PressureState;
+import org.sagebase.crf.step.heartrate.BpmRecorder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

@@ -147,8 +147,7 @@ public interface BpmRecorder {
     }
     
     class HeartBeatJsonWriter extends JsonArrayDataRecorder
-            implements HeartbeatSampleTracker
-            .HeartRateUpdateListener {
+            implements HeartbeatSampleTracker.HeartRateUpdateListener {
         
         private static final Logger LOG = LoggerFactory.getLogger(HeartBeatJsonWriter.class);
         
@@ -255,7 +254,7 @@ public interface BpmRecorder {
             } else {
                 mJsonObject.remove(HEART_RATE_KEY);
             }
-            
+
             if (LOG.isTraceEnabled()) {
                 LOG.trace("HeartBeatSample : {}", sample);
             }
@@ -332,7 +331,7 @@ public interface BpmRecorder {
                     }
                 }
 
-                
+
             } else {  // We need thresholds to be passed sequentially otherwise it is restarted
                 mIntelligentStartCounter = 0;
 
