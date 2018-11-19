@@ -57,6 +57,7 @@ import org.researchstack.backbone.step.Step;
 import org.researchstack.backbone.step.active.recorder.Recorder;
 import org.researchstack.backbone.step.active.recorder.RecorderListener;
 import org.sagebase.crf.step.CrfHeartRateStepLayout;
+import org.sagebase.crf.step.heartrate.BpmRecorder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -67,7 +68,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
