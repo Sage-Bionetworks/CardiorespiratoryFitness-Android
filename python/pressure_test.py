@@ -102,7 +102,7 @@ def normalize(original):
 
 
 # Global variables
-user = "Nick-2"
+user = "Megha"
 threshold = .10
 lowcut_global = 2
 highcut_global = 25
@@ -198,10 +198,12 @@ plt.show()
 plt.close(6)
 
 new_std = calculate_std(c, step)
+threshold = [0.01] * len(new_std)
 
 plt.figure(7)
 plt.title("Standard Deviation of Angle Equation")
 plt.plot(new_std, 'r')
+plt.plot(threshold, 'b')
 plt.show()
 plt.close(7)
 
