@@ -66,12 +66,54 @@ public interface BpmRecorder {
          */
         void intelligentStartUpdate(float progress, boolean ready);
     }
-    
+
+    interface PressureListener {
+        class PressureHolder {
+            public final boolean pressureExcessive;
+
+            public PressureHolder(boolean pressureExcessive) {
+                this.pressureExcessive = pressureExcessive;
+            }
+
+        }
+        @UiThread
+        void pressureUpdate(PressureHolder pressure);
+    }
+
+    interface CameraCoveredListener {
+        class CameraCoveredHolder {
+            public final boolean cameraCovered;
+
+            public CameraCoveredHolder(boolean cameraCovered) {
+                this.cameraCovered = cameraCovered;
+            }
+        }
+        @UiThread
+        void cameraUpdate(CameraCoveredHolder camera);
+
+    }
+
     class BpmCalculator {
         
         private static final Logger LOG = LoggerFactory.getLogger(BpmCalculator.class);
 
         private final HeartRateSampleProcessor sampleProcessor = new HeartRateSampleProcessor();
+        
+        ;
+        
+        private static final int BEATS_ARRAY_SIZE = 3;
+        private static final int AVERAGE_ARRAY_SIZE = 4;
+        private static int beatsIndex = 0;
+        
+        private TYPE currentType = TYPE.GREEN;
+        private int beats = 0;
+        private int averageIndex = 0;
+        
+        private final int[] beatsArray = new int[BEATS_ARRAY_SIZE];
+        private final int[] averageArray = new int[AVERAGE_ARRAY_SIZE];
+        
+        private double startTime = -1;
+        
         
         /**
          * Calculates a simple running average bpm to display to the user for their heart rate. Updates the sample
@@ -103,6 +145,9 @@ public interface BpmRecorder {
         private static final String TIMESTAMP_IN_SECONDS_KEY = "timestamp";
         private static final String UPTIME_IN_SECONDS_KEY = "uptime";
         private static final String HEART_RATE_KEY = "bpm_camera";
+        private static final String HUE_KEY = "hue";
+        private static final String SATURATION_KEY = "saturation";
+        private static final String BRIGHTNESS_KEY = "brightness";
         private static final String RED_KEY = "red";
         private static final String GREEN_KEY = "green";
         private static final String BLUE_KEY = "blue";
@@ -142,62 +187,56 @@ public interface BpmRecorder {
             this.mIntelligentStartListener = mIntelligentStartListener;
             this.bpmCalculator = new BpmCalculator();
         }
-
-        private int sampleCount = 0;
-        private double timestampReference = -1;
         
         @AnyThread
         @Override
         public void onHeartRateSampleDetected(HeartBeatSample sample) {
             bpmCalculator.calculateBpm(sample);
 
-            // syoung 11/19/2018 Debug code added to get the sampling rate.
-            if (timestampReference == -1) {
-                timestampReference = sample.timestamp;
-            }
-            else if (sample.timestamp - timestampReference >= 1.0) {
-                LOG.debug("preprocessed sample count:{}", sampleCount);
-                timestampReference = sample.timestamp;
-                sampleCount = 0;
-            }
-            else {
-                sampleCount++;
-            }
+            if (timestampZeroReference < 0) {
+                // set timestamp reference, which timestamps are measured relative to
+                timestampZeroReference = sample.t;
+                uptimeZeroReference = System.nanoTime() * 1e-9;
 
-            if (sample.timestampDate != null) {
+                Date timestampReferenceDate = new Date(System.currentTimeMillis());
                 mJsonObject.addProperty(TIMESTAMP_DATE_KEY,
                         new SimpleDateFormat(FormatHelper.DATE_FORMAT_ISO_8601, new Locale("en", "us", "POSIX"))
-                                .format(sample.timestampDate));
+                                .format(timestampReferenceDate));
                 LOG.debug("TIMESTAMP Date key: " + mJsonObject.get(TIMESTAMP_DATE_KEY).getAsString());
             } else {
                 mJsonObject.remove(TIMESTAMP_DATE_KEY);
             }
 
-            mJsonObject.addProperty(TIMESTAMP_IN_SECONDS_KEY, sample.timestamp);
-            mJsonObject.addProperty(UPTIME_IN_SECONDS_KEY, sample.uptime);
-            mJsonObject.addProperty(RED_KEY, sample.red);
-            mJsonObject.addProperty(GREEN_KEY, sample.green);
-            mJsonObject.addProperty(BLUE_KEY, sample.blue);
-            mJsonObject.addProperty(RED_LEVEL_KEY, sample.redLevel);
+            double relativeTimestamp = ((sample.t - timestampZeroReference) / 1_000);
+            double uptime = uptimeZeroReference + relativeTimestamp;
 
+            mJsonObject.addProperty(TIMESTAMP_IN_SECONDS_KEY, relativeTimestamp);
+            mJsonObject.addProperty(UPTIME_IN_SECONDS_KEY, uptime);
+            mJsonObject.addProperty(HUE_KEY, sample.h);
+            mJsonObject.addProperty(SATURATION_KEY, sample.s);
+            mJsonObject.addProperty(BRIGHTNESS_KEY, sample.v);
+            mJsonObject.addProperty(RED_KEY, sample.r);
+            mJsonObject.addProperty(GREEN_KEY, sample.g);
+            mJsonObject.addProperty(BLUE_KEY, sample.b);
+            mJsonObject.addProperty(RED_LEVEL_KEY, sample.redLevel);
+            
             if (sample.bpm > 0) {
                 mJsonObject.addProperty(HEART_RATE_KEY, sample.bpm);
                 if (mBpmUpdateListener != null) {
                     mainHandler.post(() ->
                             mBpmUpdateListener.bpmUpdate(
-                                    new BpmRecorder.BpmUpdateListener.BpmHolder(sample.bpm, (long)sample.timestamp)));
+                                    new BpmRecorder.BpmUpdateListener.BpmHolder(sample.bpm, (long)sample.t)));
                 }
             } else {
                 mJsonObject.remove(HEART_RATE_KEY);
             }
-
+            
             if (LOG.isTraceEnabled()) {
-                LOG.trace("HeartBeatSample : {}", sample);
+                LOG.trace("HeartBeatSample: {}", sample);
             }
-
-            writeJsonObjectToFile(mJsonObject);
-
+            
             if (!mEnableIntelligentStart || mIntelligentStartPassed) {
+                writeJsonObjectToFile(mJsonObject);
             } else {
                 updateIntelligentStart(sample);
             }
@@ -208,8 +247,17 @@ public interface BpmRecorder {
                 return; // we already computed that we could start
             }
             
+            // When a finger is placed in front of the camera with the flash on,
+            // the camera image will be almost entirely red, so use a simple lenient algorithm
+            // for this
+            float greenBlueSum = sample.g + sample.b;
+            if (greenBlueSum == 0.0f) {
+                greenBlueSum = 0.0000000001f;
+            }
+            float redFactor = sample.r / greenBlueSum;
+            
             // If the red factor is large enough, we update the trigger
-            if (sample.isCoveringLens()) {
+            if (redFactor >= RED_INTENSITY_FACTOR_THRESHOLD) {
                 mIntelligentStartCounter++;
                 if (mIntelligentStartCounter >= INTELLIGENT_START_FRAMES_TO_PASS) {
                     mIntelligentStartPassed = true;
