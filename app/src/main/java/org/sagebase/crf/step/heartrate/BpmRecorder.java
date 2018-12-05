@@ -29,6 +29,8 @@ import org.researchstack.backbone.step.Step;
 import org.researchstack.backbone.step.active.recorder.JsonArrayDataRecorder;
 import org.researchstack.backbone.utils.FormatHelper;
 import org.sagebase.crf.step.active.HeartBeatSample;
+import org.sagebase.crf.step.active.HeartRateBPM;
+import org.sagebase.crf.step.active.HeartRateSampleProcessor;
 import org.sagebase.crf.step.active.HeartbeatSampleTracker;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -72,7 +74,7 @@ public interface BpmRecorder {
         private static final Logger LOG = LoggerFactory.getLogger(BpmCalculator.class);
 
         private final HeartRateSampleProcessor sampleProcessor = new HeartRateSampleProcessor();
-        
+
         /**
          * Calculates a simple running average bpm to display to the user for their heart rate. Updates the sample
          * with the calculated bpm, if there is one.
@@ -145,7 +147,7 @@ public interface BpmRecorder {
 
         private int sampleCount = 0;
         private double timestampReference = -1;
-        
+
         @AnyThread
         @Override
         public void onHeartRateSampleDetected(HeartBeatSample sample) {
@@ -207,7 +209,7 @@ public interface BpmRecorder {
             if (mIntelligentStartPassed) {
                 return; // we already computed that we could start
             }
-            
+
             // If the red factor is large enough, we update the trigger
             if (sample.isCoveringLens()) {
                 mIntelligentStartCounter++;
