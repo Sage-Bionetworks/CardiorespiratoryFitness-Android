@@ -137,6 +137,7 @@ public class HeartRateCamera2Recorder extends Recorder {
         mediaRecorderFile = new File(getOutputDirectory(), uniqueFilename + ".mp4");
         subscriptions = new CompositeSubscription();
         heartBeatJsonWriter = new BpmRecorder.HeartBeatJsonWriter(stepLayout, stepLayout,
+                stepLayout, stepLayout,
                 identifier + "Json", step,
                 outputDirectory );
         heartBeatJsonWriter.setRecorderListener(stepLayout);

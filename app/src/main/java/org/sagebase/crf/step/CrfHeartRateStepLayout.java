@@ -76,6 +76,8 @@ import java.util.Locale;
 public class CrfHeartRateStepLayout extends ActiveStepLayout implements
         BpmRecorder.BpmUpdateListener,
         BpmRecorder.IntelligentStartUpdateListener,
+        BpmRecorder.CameraCoveredListener,
+        BpmRecorder.PressureListener,
         RecorderListener,
         CrfTaskToolbarTintManipulator,
         CrfTaskStatusBarManipulator,
@@ -115,6 +117,7 @@ public class CrfHeartRateStepLayout extends ActiveStepLayout implements
 
     protected  Recorder cameraRecorder;
     protected boolean shouldContinueOnStop = false;
+    protected boolean displaySurvey = false;
     protected boolean isFinished = false;
     private boolean shouldShowFinishUi = false;
 
@@ -354,6 +357,9 @@ public class CrfHeartRateStepLayout extends ActiveStepLayout implements
         if (shouldContinueOnStop) {
             onNextButtonClicked();
         }
+        if (displaySurvey) {
+            displaySurvey();
+        }
     }
 
     protected void onNextButtonClicked() {
@@ -371,6 +377,10 @@ public class CrfHeartRateStepLayout extends ActiveStepLayout implements
         pauseActiveStepLayout();
         forceStop();
         callbacks.onSaveStep(StepCallbacks.ACTION_PREV, activeStep, null);
+    }
+
+    protected void displaySurvey() {
+
     }
 
     protected void showCompleteUi() {
@@ -496,6 +506,16 @@ public class CrfHeartRateStepLayout extends ActiveStepLayout implements
     @Override
     public Context getBroadcastContext() {
         return getContext().getApplicationContext();
+    }
+
+    @Override
+    public void pressureUpdate(PressureHolder pressure) {
+
+    }
+
+    @Override
+    public void cameraUpdate(CameraCoveredHolder camera) {
+
     }
 
     private class HeartBeatAnimation extends AlphaAnimation {

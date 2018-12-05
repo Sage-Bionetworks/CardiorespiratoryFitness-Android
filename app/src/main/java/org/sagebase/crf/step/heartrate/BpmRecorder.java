@@ -66,13 +66,39 @@ public interface BpmRecorder {
          */
         void intelligentStartUpdate(float progress, boolean ready);
     }
-    
+
+    interface PressureListener {
+        class PressureHolder {
+            public final boolean pressureExcessive;
+
+            public PressureHolder(boolean pressureExcessive) {
+                this.pressureExcessive = pressureExcessive;
+            }
+
+        }
+        @UiThread
+        void pressureUpdate(PressureHolder pressure);
+    }
+
+    interface CameraCoveredListener {
+        class CameraCoveredHolder {
+            public final boolean cameraCovered;
+
+            public CameraCoveredHolder(boolean cameraCovered) {
+                this.cameraCovered = cameraCovered;
+            }
+        }
+        @UiThread
+        void cameraUpdate(CameraCoveredHolder camera);
+
+    }
+
     class BpmCalculator {
         
         private static final Logger LOG = LoggerFactory.getLogger(BpmCalculator.class);
 
         private final HeartRateSampleProcessor sampleProcessor = new HeartRateSampleProcessor();
-        
+
         /**
          * Calculates a simple running average bpm to display to the user for their heart rate. Updates the sample
          * with the calculated bpm, if there is one.
@@ -127,7 +153,9 @@ public interface BpmRecorder {
         
         private final BpmRecorder.BpmUpdateListener mBpmUpdateListener;
         private final BpmRecorder.IntelligentStartUpdateListener mIntelligentStartListener;
-        
+        private final BpmRecorder.PressureListener mPressureListener;
+        private final BpmRecorder.CameraCoveredListener mCameraListener;
+
         private final Handler mainHandler = new Handler(Looper.getMainLooper());
         
         private final BpmCalculator bpmCalculator;
@@ -135,17 +163,21 @@ public interface BpmRecorder {
         public HeartBeatJsonWriter(BpmUpdateListener
                                            mBpmUpdateListener, IntelligentStartUpdateListener
                                            mIntelligentStartListener,
-                                   String identifier, Step step, File outputDirectory) {
+                                   CameraCoveredListener mCameraListener,
+                                   PressureListener mPressureListener, String identifier,
+                                   Step step, File outputDirectory) {
             super(identifier, step, outputDirectory);
             
             this.mBpmUpdateListener = mBpmUpdateListener;
             this.mIntelligentStartListener = mIntelligentStartListener;
+            this.mPressureListener = mPressureListener;
+            this.mCameraListener = mCameraListener;
             this.bpmCalculator = new BpmCalculator();
         }
 
         private int sampleCount = 0;
         private double timestampReference = -1;
-        
+
         @AnyThread
         @Override
         public void onHeartRateSampleDetected(HeartBeatSample sample) {
@@ -207,7 +239,7 @@ public interface BpmRecorder {
             if (mIntelligentStartPassed) {
                 return; // we already computed that we could start
             }
-            
+
             // If the red factor is large enough, we update the trigger
             if (sample.isCoveringLens()) {
                 mIntelligentStartCounter++;
