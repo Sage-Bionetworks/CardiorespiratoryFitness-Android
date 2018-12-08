@@ -37,7 +37,6 @@ import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Locale;
 
 /**
@@ -72,9 +71,11 @@ public interface BpmRecorder {
     interface PressureListener {
         class PressureHolder {
             public final boolean pressureExcessive;
+            public final String outputText;
 
-            public PressureHolder(boolean pressureExcessive) {
+            public PressureHolder(boolean pressureExcessive, String outputText) {
                 this.pressureExcessive = pressureExcessive;
+                this.outputText = outputText;
             }
 
         }
@@ -85,9 +86,11 @@ public interface BpmRecorder {
     interface CameraCoveredListener {
         class CameraCoveredHolder {
             public final boolean cameraCovered;
+            public final String outputText;
 
-            public CameraCoveredHolder(boolean cameraCovered) {
+            public CameraCoveredHolder(boolean cameraCovered, String outputText) {
                 this.cameraCovered = cameraCovered;
+                this.outputText = outputText;
             }
         }
         @UiThread
@@ -122,7 +125,8 @@ public interface BpmRecorder {
     }
     
     class HeartBeatJsonWriter extends JsonArrayDataRecorder
-            implements HeartbeatSampleTracker.HeartRateUpdateListener {
+            implements HeartbeatSampleTracker
+            .HeartRateUpdateListener {
         
         private static final Logger LOG = LoggerFactory.getLogger(HeartBeatJsonWriter.class);
         
@@ -224,7 +228,7 @@ public interface BpmRecorder {
             } else {
                 mJsonObject.remove(HEART_RATE_KEY);
             }
-
+            
             if (LOG.isTraceEnabled()) {
                 LOG.trace("HeartBeatSample : {}", sample);
             }
@@ -256,10 +260,16 @@ public interface BpmRecorder {
                             mIntelligentStartListener.intelligentStartUpdate(progress,
                                     mIntelligentStartPassed)
                     );
+
                 }
                 
             } else {  // We need thresholds to be passed sequentially otherwise it is restarted
                 mIntelligentStartCounter = 0;
+                mainHandler.post(() ->
+                        mCameraListener.cameraUpdate(new
+                                BpmRecorder.CameraCoveredListener.CameraCoveredHolder(false,
+                                "Cover the camera properly.")));
+
             }
         }
         
