@@ -68,7 +68,7 @@ public interface BpmRecorder {
          */
         void intelligentStartUpdate(float progress, boolean ready);
     }
-    
+
     class BpmCalculator {
         
         private static final Logger LOG = LoggerFactory.getLogger(BpmCalculator.class);
@@ -129,7 +129,7 @@ public interface BpmRecorder {
         
         private final BpmRecorder.BpmUpdateListener mBpmUpdateListener;
         private final BpmRecorder.IntelligentStartUpdateListener mIntelligentStartListener;
-        
+
         private final Handler mainHandler = new Handler(Looper.getMainLooper());
         
         private final BpmCalculator bpmCalculator;
@@ -224,6 +224,7 @@ public interface BpmRecorder {
                             mIntelligentStartListener.intelligentStartUpdate(progress,
                                     mIntelligentStartPassed)
                     );
+
                 }
                 
             } else {  // We need thresholds to be passed sequentially otherwise it is restarted
