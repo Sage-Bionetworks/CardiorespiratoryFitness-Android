@@ -146,18 +146,7 @@
             android:layout_height="wrap_content"
             android:text="@string/crf_camera_cover"
             android:layout_gravity="center"
-            android:textColor="@color/salmon80"
-            android:padding="@dimen/rsb_padding_large"
-            android:visibility="gone"/>
-
-        <TextView
-            style="@style/TextAppearance.Crf.ActiveStatusText"
-            android:id="@+id/crf_pressure_error"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/crf_cant_read"
-            android:layout_gravity="center"
-            android:textColor="@color/salmon80"
+            android:textColor="@color/black86"
             android:padding="@dimen/rsb_padding_large"
             android:visibility="gone"/>
 
@@ -190,7 +179,7 @@
         android:clipChildren="false">
 
         <Button
-            style="@style/Widget.Crf.SubmitBar"
+            style="@style/Crf.Salmon.RoundedCornerMaterialButton"
             android:id="@+id/crf_next_button"
             android:layout_width="match_parent"
             android:layout_height="@dimen/crf_rounded_button_height"
