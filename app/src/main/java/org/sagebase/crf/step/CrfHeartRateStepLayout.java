@@ -79,6 +79,8 @@ public class CrfHeartRateStepLayout extends ActiveStepLayout implements
         BpmRecorder.IntelligentStartUpdateListener,
         BpmRecorder.CameraCoveredListener,
         BpmRecorder.PressureListener,
+        BpmRecorder.DeclineHRListener,
+        BpmRecorder.AbnormalHRListener,
         RecorderListener,
         CrfTaskToolbarTintManipulator,
         CrfTaskStatusBarManipulator,
@@ -88,7 +90,6 @@ public class CrfHeartRateStepLayout extends ActiveStepLayout implements
     private static final String AVERAGE_BPM_IDENTIFIER = "AVERAGE_BPM_IDENTIFIER";
     private static final String BPM_START_IDENTIFIER_SUFFIX = ".heartRate_start";
     private static final String BPM_END_IDENTIFIER_SUFFIX = ".heartRate_end";
-    private static final String CAMERA_NOT_COVERED = "CAMERA_UNCOVERED";
 
     private CameraSourcePreview cameraSourcePreview;
     private TextureView cameraPreview;
@@ -120,6 +121,7 @@ public class CrfHeartRateStepLayout extends ActiveStepLayout implements
     protected  Recorder cameraRecorder;
     protected boolean shouldContinueOnStop = false;
     protected boolean displaySurvey = false;
+    protected boolean displayDecliningStatement = false;
     protected boolean isFinished = false;
     private boolean shouldShowFinishUi = false;
 
@@ -359,7 +361,10 @@ public class CrfHeartRateStepLayout extends ActiveStepLayout implements
         if (shouldContinueOnStop) {
             onNextButtonClicked();
         }
-        if (displaySurvey) {
+        if(displayDecliningStatement) {
+            displayDeclining();
+        }
+        else if (displaySurvey) {
             displaySurvey();
         }
     }
@@ -382,6 +387,10 @@ public class CrfHeartRateStepLayout extends ActiveStepLayout implements
     }
 
     protected void displaySurvey() {
+
+    }
+
+    protected void displayDeclining() {
 
     }
 
@@ -512,7 +521,9 @@ public class CrfHeartRateStepLayout extends ActiveStepLayout implements
 
     @Override
     public void pressureUpdate(PressureHolder pressure) {
-
+        if(pressure.pressureExcessive) {
+            showPressureError();
+        }
     }
 
     @Override
@@ -524,6 +535,7 @@ public class CrfHeartRateStepLayout extends ActiveStepLayout implements
             showHR(0);
         }
     }
+
 
     private void showHR(int HR) {
         TextView e = findViewById(R.id.crf_heart_rate_error);
@@ -541,6 +553,33 @@ public class CrfHeartRateStepLayout extends ActiveStepLayout implements
         TextView e = findViewById(R.id.crf_heart_rate_error);
         e.setVisibility(VISIBLE);
     }
+
+    private void showPressureError()  {
+        LinearLayout t = findViewById(R.id.crf_bpm_text_container);
+        t.setVisibility(GONE);
+
+        ImageView i = findViewById(R.id.crf_heart_icon);
+        i.setVisibility(GONE);
+
+        TextView p = findViewById(R.id.crf_pressure_error);
+        p.setVisibility(VISIBLE);
+
+    }
+
+    @Override
+    public void abnormalHRUpdate(AbnormalHRHolder abnormal) {
+        if(abnormal.abnormal) {
+            this.displaySurvey = true;
+        }
+    }
+
+    @Override
+    public void declineHRUpdate(DeclineHRHolder decline) {
+        if(decline.declining) {
+            this.displayDecliningStatement = true;
+        }
+    }
+
     private class HeartBeatAnimation extends AlphaAnimation {
 
         void setBpm(int bpm) {
