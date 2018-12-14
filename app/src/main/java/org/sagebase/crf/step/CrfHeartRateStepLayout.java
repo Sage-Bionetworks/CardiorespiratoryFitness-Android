@@ -361,12 +361,6 @@ public class CrfHeartRateStepLayout extends ActiveStepLayout implements
         if (shouldContinueOnStop) {
             onNextButtonClicked();
         }
-        if(displayDecliningStatement) {
-            displayDeclining();
-        }
-        else if (displaySurvey) {
-            displaySurvey();
-        }
     }
 
     protected void onNextButtonClicked() {
@@ -569,6 +563,11 @@ public class CrfHeartRateStepLayout extends ActiveStepLayout implements
     @Override
     public void abnormalHRUpdate(AbnormalHRHolder abnormal) {
         if(abnormal.abnormal) {
+            StepResult<Boolean> abnormalHRResult = new StepResult<>(new Step("displaySurvey"));
+            abnormalHRResult.setResult(true);
+            stepResult.setResultForIdentifier("displaySurvey",
+                    abnormalHRResult);
+
             this.displaySurvey = true;
         }
     }
@@ -576,6 +575,10 @@ public class CrfHeartRateStepLayout extends ActiveStepLayout implements
     @Override
     public void declineHRUpdate(DeclineHRHolder decline) {
         if(decline.declining) {
+            StepResult<Boolean> decliningHRResult = new StepResult<>(new Step("displayDecliningHR"));
+            decliningHRResult.setResult(true);
+            stepResult.setResultForIdentifier("displayDecliningHR",
+                    decliningHRResult);
             this.displayDecliningStatement = true;
         }
     }
