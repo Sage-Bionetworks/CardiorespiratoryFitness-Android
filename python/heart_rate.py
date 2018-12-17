@@ -48,11 +48,11 @@ def get_heartrate(heartrate_data, window_length=10, lowcut=1, highcut=25, bandpa
 	blue = get_filtered_signal(blue, sampling_rate, mforder, bandpass_order, lowcut, highcut)
 
 	# Get HR
-	red = get_hr_from_time_series(red, sampling_rate, 40, 200)
-	blue = get_hr_from_time_series(blue, sampling_rate, 40, 200)
-	green = get_hr_from_time_series(green, sampling_rate, 40, 200)
+	red_hr, r_conf = get_hr_from_time_series(red, sampling_rate, 40, 200)
+	blue_hr, b_conf = get_hr_from_time_series(blue, sampling_rate, 40, 200)
+	green_hr, g_conf = get_hr_from_time_series(green, sampling_rate, 40, 200)
 
-	if red is None or green is None or blue is None:
+	if red_hr is None or green_hr is None or blue_hr is None:
 		return null_df
 
 	if sampling_rate < 55:
@@ -63,7 +63,7 @@ def get_heartrate(heartrate_data, window_length=10, lowcut=1, highcut=25, bandpa
 	records = []
 
 	for i in range(len(red)):
-		row = (red[i], green[i], blue[i], sampling_rate)
+		row = (red_hr[i], green_hr[i], blue_hr[i], sampling_rate)
 		records.append(row)
 
 	heartrate_df = pd.DataFrame.from_records(records, columns=columns) 
@@ -71,7 +71,16 @@ def get_heartrate(heartrate_data, window_length=10, lowcut=1, highcut=25, bandpa
 
 	return 0
 
+def replace_with_zero(arr):
+	refreshed = []
+	for i in range(len(arr)):
+		if arr[i] is None:
+			refreshed.append(0)
+		else:
+			refreshed.append(arr[i])
 
+	return refreshed
+	
 #' Bandpass and sorted mean filter the given signal
 #'
 #' @param x A time series numeric data
