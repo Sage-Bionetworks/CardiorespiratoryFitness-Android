@@ -36,6 +36,7 @@ import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.Transformation;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -344,6 +345,7 @@ public class CrfHeartRateStepLayout extends ActiveStepLayout implements
         currentHeartRate.setText(bpmHolder.bpm + " " + getContext().getString(R.string.crf_bpm));
         heartBeatAnimation.setBpm(bpmHolder.bpm);
         bpmList.add(bpmHolder);
+        resetView();
     }
 
     @Override
@@ -380,7 +382,6 @@ public class CrfHeartRateStepLayout extends ActiveStepLayout implements
         cameraSourcePreview.setVisibility(View.INVISIBLE);
         arcDrawableContainer.setVisibility(View.GONE);
         heartRateTextContainer.setVisibility(View.VISIBLE);
-        currentHeartRate.setVisibility(View.GONE);
 
         if (!bpmList.isEmpty()) {
             int bpmSum = 0;
@@ -496,6 +497,99 @@ public class CrfHeartRateStepLayout extends ActiveStepLayout implements
     @Override
     public Context getBroadcastContext() {
         return getContext().getApplicationContext();
+    }
+
+    @Override
+    public void pressureUpdate(PressureHolder pressure) {
+        if(pressure.isPressureExcessive) {
+            LOG.error("Too much pressure on the camera");
+            showPressureStatus();
+        }
+        else {
+            LOG.error("Pressure is alright");
+            resetView();
+        }
+    }
+
+    @Override
+    public void cameraUpdate(CameraCoveredHolder camera) {
+        if(camera.isCameraCovered) {
+            resetView();
+            LOG.error("Camera is covered");
+
+        }
+        else {
+            LOG.error("Camera is not covered");
+            showHRStatus();
+        }
+    }
+
+
+    private void resetView() {
+        TextView e = findViewById(R.id.crf_heart_rate_error);
+        e.setVisibility(GONE);
+
+        TextView p = findViewById(R.id.crf_pressure_error);
+        p.setVisibility(GONE);
+
+
+        ImageView i = findViewById(R.id.crf_heart_icon);
+        i.setVisibility(VISIBLE);
+
+        FrameLayout c = findViewById(R.id.crf_arc_drawable_container);
+        c.setVisibility(VISIBLE);
+
+    }
+
+    private void showHRStatus() {
+        LOG.error("Displaying camera error");
+        LinearLayout t = findViewById(R.id.crf_bpm_text_container);
+        t.setVisibility(GONE);
+
+        ImageView i = findViewById(R.id.crf_heart_icon);
+        i.setVisibility(GONE);
+
+        FrameLayout c = findViewById(R.id.crf_arc_drawable_container);
+        c.setVisibility(GONE);
+
+        TextView e = findViewById(R.id.crf_heart_rate_error);
+        e.setVisibility(VISIBLE);
+    }
+
+    private void showPressureStatus()  {
+        LOG.error("Displaying pressure error");
+        LinearLayout t = findViewById(R.id.crf_bpm_text_container);
+        t.setVisibility(GONE);
+
+        ImageView i = findViewById(R.id.crf_heart_icon);
+        i.setVisibility(GONE);
+
+        FrameLayout c = findViewById(R.id.crf_arc_drawable_container);
+        c.setVisibility(GONE);
+
+        TextView p = findViewById(R.id.crf_pressure_error);
+        p.setVisibility(VISIBLE);
+
+    }
+
+    @Override
+    public void abnormalHRUpdate(AbnormalHRHolder abnormal) {
+        if(abnormal.isAbnormal) {
+            StepResult<Boolean> abnormalHRResult = new StepResult<>(new Step("displaySurvey"));
+            abnormalHRResult.setResult(true);
+            stepResult.setResultForIdentifier("displaySurvey",
+                    abnormalHRResult);
+        }
+    }
+
+    @Override
+    public void declineHRUpdate(DeclineHRHolder decline) {
+        if(decline.isDeclining) {
+            StepResult<Boolean> decliningHRResult = new StepResult<>(new Step("displayDecliningHR"));
+            decliningHRResult.setResult(true);
+            stepResult.setResultForIdentifier("displayDecliningHR",
+                    decliningHRResult);
+        }
     }
 
     private class HeartBeatAnimation extends AlphaAnimation {
