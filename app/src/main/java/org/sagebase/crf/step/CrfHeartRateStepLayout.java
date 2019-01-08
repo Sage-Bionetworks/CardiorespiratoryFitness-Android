@@ -220,7 +220,7 @@ public class CrfHeartRateStepLayout extends ActiveStepLayout implements
         bpmList = new ArrayList<>();
 
         HeartRateCameraRecorderConfig config =
-                new HeartRateCameraRecorderConfig("HeartRateCamera");
+                new HeartRateCameraRecorderConfig("cameraHeartRate");
         cameraRecorder = config.recorderForStep(
                 cameraSourcePreview, activeStep, this, getOutputDirectory(getContext()));
         cameraRecorder.setRecorderListener(this);

@@ -243,6 +243,12 @@ public interface BpmRecorder {
                 stopJsonDataLogging();
             }
         }
+
+        //Overide so we don't get step id (_camera) added as a suffix
+        @Override
+        public String fileResultIdentifier() {
+            return getIdentifier();
+        }
         
     }
 }

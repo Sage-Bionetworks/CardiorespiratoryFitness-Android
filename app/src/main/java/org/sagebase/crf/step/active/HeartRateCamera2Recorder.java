@@ -129,7 +129,7 @@ public class HeartRateCamera2Recorder extends Recorder {
     
     public HeartRateCamera2Recorder(String identifier, Step step, File outputDirectory,
                                     CrfHeartRateStepLayout stepLayout) {
-        super(identifier + "Video", step, outputDirectory);
+        super(identifier + "_recorder_video", step, outputDirectory);
         textureView = stepLayout.getCameraPreview();
     
         Context context = textureView.getContext();
@@ -137,7 +137,7 @@ public class HeartRateCamera2Recorder extends Recorder {
         mediaRecorderFile = new File(getOutputDirectory(), uniqueFilename + ".mp4");
         subscriptions = new CompositeSubscription();
         heartBeatJsonWriter = new BpmRecorder.HeartBeatJsonWriter(stepLayout, stepLayout,
-                identifier + "Json", step,
+                identifier + "_recorder", step,
                 outputDirectory );
         heartBeatJsonWriter.setRecorderListener(stepLayout);
         renderScript = RenderScript.create(context);
@@ -693,5 +693,12 @@ public class HeartRateCamera2Recorder extends Recorder {
             recordingFailed(e);
         }
         return null;
+    }
+
+
+    //Overide so we don't get step id (_camera) added as a suffix
+    @Override
+    public String fileResultIdentifier() {
+        return getIdentifier();
     }
 }
