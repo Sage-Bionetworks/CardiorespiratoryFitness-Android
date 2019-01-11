@@ -579,8 +579,8 @@ public class CrfHeartRateStepLayout extends ActiveStepLayout implements
     public void abnormalHRUpdate(AbnormalHRHolder abnormal) {
         if(abnormal.isAbnormal) {
             StepResult<Boolean> abnormalHRResult = new StepResult<>(new Step("displaySurvey"));
-            abnormalHRResult.setResult(true);
-            stepResult.setResultForIdentifier("displaySurvey",
+            abnormalHRResult.setResult(false);
+            stepResult.setResultForIdentifier("skipAbnormalStep",
                     abnormalHRResult);
         }
     }
@@ -589,8 +589,8 @@ public class CrfHeartRateStepLayout extends ActiveStepLayout implements
     public void declineHRUpdate(DeclineHRHolder decline) {
         if(decline.isDeclining) {
             StepResult<Boolean> decliningHRResult = new StepResult<>(new Step("displayDecliningHR"));
-            decliningHRResult.setResult(true);
-            stepResult.setResultForIdentifier("displayDecliningHR",
+            decliningHRResult.setResult(false);
+            stepResult.setResultForIdentifier("skipDeclineStep",
                     decliningHRResult);
         }
     }
