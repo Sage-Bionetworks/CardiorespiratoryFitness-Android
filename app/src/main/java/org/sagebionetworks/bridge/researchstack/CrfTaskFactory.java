@@ -305,24 +305,11 @@ public class CrfTaskFactory extends TaskItemFactory {
         if(item.identifier != null) {
             step.stepIdentifier = item.identifier;
         }
+        step.hideProgress = item.hideProgress;
         if(item.skipIdentifier != null) {
             step.skipIdentifier = item.skipIdentifier;
         }
     }
-
-    /*private CrfSkipMCStep createCrfMCSkipStep(CrfSkipMCStepSurveyItem item, Context context) {
-        if (item.items == null || item.items.isEmpty()) {
-            throw new IllegalStateException("compound surveys must have step items to proceed");
-        }
-
-        List<QuestionStep> questionSteps = super.formStepCreateQuestionSteps(context, item);
-        CrfSkipMCStep step = new CrfSkipMCStep(item.identifier, item.title, item.text, questionSteps);
-        fillNavigationFormStep(step, item);
-        if(item.skipIdentifier != null) {
-            step.skipIdentifier = item.skipIdentifier;
-        }
-        return step;
-    }*/
 
     private void fillCrfStartTaskStep(CrfStartTaskStep step, CrfStartTaskSurveyItem item) {
         fillCrfInstructionStep(step, item);
@@ -464,6 +451,7 @@ public class CrfTaskFactory extends TaskItemFactory {
         CrfSkipMCStep step = new CrfSkipMCStep(item.identifier, item.title, item.text, questionSteps);
         fillNavigationFormStep(step, item);
         step.skipIdentifier = item.skipIdentifier;
+        step.hideProgress = item.hideProgress;
         return step;
     }
 

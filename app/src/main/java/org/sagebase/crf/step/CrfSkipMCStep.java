@@ -28,6 +28,11 @@ public class CrfSkipMCStep extends CrfFormStep implements NavigableOrderedTask.N
 
     public String skipIdentifier;
 
+    /**
+     * Hides the progress bar when this step is within a toolbar with progress
+     */
+    public boolean hideProgress;
+
     /* Default constructor needed for serialization/deserialization of object */
     public CrfSkipMCStep() {
         super();
