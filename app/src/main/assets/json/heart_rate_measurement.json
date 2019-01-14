@@ -26,15 +26,17 @@
       "identifier": "declining_hr",
       "skipIdentifier": "skipDeclineStep",
       "type": "crf_skip_instruction",
-      "text: " : "Declining step",
-      "backgroundColor" : "#000000",
-      "buttonType" : "heart",
-      "buttonText"       : "next"
+      "hideProgress": "true",
+      "text " : "Gently cover both the camera and flash with your finger.",
+      "detailText" : "You can try to sit and relax for a little bit longer or we can remind you to take this test later",
+      "buttonType" : "default",
+      "buttonText"       : "Remind me later"
     },
     {
       "identifier": "abnormal_hr",
       "skipIdentifier" : "skipAbnormalStep",
       "type": "crf_skip_mc",
+      "hideProgress": "true",
       "title": "We noticed that 2 or more measurements are out of your normal range. Is there anything below that might be influencing this?",
       "detailText": "Why are we asking this?",
       "text": "(select all that apply)",
