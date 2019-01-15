@@ -70,10 +70,10 @@ public interface BpmRecorder {
 
     interface PressureListener {
         class PressureHolder {
-            public final boolean pressureExcessive;
+            public final boolean isPressureExcessive;
 
             public PressureHolder(boolean pressureExcessive) {
-                this.pressureExcessive = pressureExcessive;
+                this.isPressureExcessive = pressureExcessive;
             }
 
         }
@@ -83,10 +83,10 @@ public interface BpmRecorder {
 
     interface CameraCoveredListener {
         class CameraCoveredHolder {
-            public final boolean cameraCovered;
+            public final boolean isCameraCovered;
 
-            public CameraCoveredHolder(boolean cameraCovered) {
-                this.cameraCovered = cameraCovered;
+            public CameraCoveredHolder(boolean isCameraCovered) {
+                this.isCameraCovered = isCameraCovered;
             }
         }
         @UiThread
@@ -96,10 +96,10 @@ public interface BpmRecorder {
 
     interface AbnormalHRListener {
         class AbnormalHRHolder {
-            public final boolean abnormal;
+            public final boolean isAbnormal;
 
             public AbnormalHRHolder(boolean abnormal) {
-                this.abnormal = abnormal;
+                this.isAbnormal = abnormal;
             }
         }
 
@@ -109,10 +109,10 @@ public interface BpmRecorder {
 
     interface DeclineHRListener {
         class DeclineHRHolder {
-            public final boolean declining;
+            public final boolean isDeclining;
 
             public DeclineHRHolder(boolean declining) {
-                this.declining = declining;
+                this.isDeclining = declining;
             }
         }
 
