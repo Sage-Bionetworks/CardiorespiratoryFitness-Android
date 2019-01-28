@@ -305,6 +305,7 @@ public interface BpmRecorder {
                                 mAbnormalListener.abnormalHRUpdate(new
                                         BpmRecorder.AbnormalHRListener.AbnormalHRHolder(false)));
                     }
+
                 }
                 if (mDeclineListener != null) {
                     if(sample.declineHR()) {

@@ -593,7 +593,7 @@ public class CrfHeartRateStepLayout extends ActiveStepLayout implements
         else {
             StepResult<Boolean> abnormalHRResult = new StepResult<>(new Step("displaySurvey"));
             abnormalHRResult.setResult(true);
-            stepResult.setResultForIdentifier("skipAbnormalStep",
+            stepResult.setResultForIdentifier("displaySurvey",
                     abnormalHRResult);
         }
     }

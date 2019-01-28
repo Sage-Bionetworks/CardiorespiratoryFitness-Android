@@ -59,6 +59,8 @@ import org.sagebase.crf.step.CrfInstructionSurveyItem;
 import org.sagebase.crf.step.CrfSkipInstructionStep;
 import org.sagebase.crf.step.CrfSkipInstructionStepSurveyItem;
 import org.sagebase.crf.step.CrfSkipMCStep;
+import org.sagebase.crf.step.CrfSkipInstructionStep;
+import org.sagebase.crf.step.CrfSkipInstructionStepSurveyItem;
 import org.sagebase.crf.step.CrfStairStep;
 import org.sagebase.crf.step.CrfPhotoCaptureStep;
 import org.sagebase.crf.step.CrfStartTaskStep;
@@ -141,6 +143,11 @@ public class CrfTaskFactory extends TaskItemFactory {
                         case CrfSurveyItemAdapter.CRF_SKIP_INSTRUCTION_TYPE:
                             if(!(item instanceof CrfSkipInstructionStepSurveyItem)) {
                                 throw new IllegalStateException("Error in json parsing, crf_skip_instruction_step types must be CrfSkipInstructionStepSurveyItem");
+                            }
+                            return createCrfSkipInstructionStep((CrfSkipInstructionStepSurveyItem) item);
+                        case CrfSurveyItemAdapter.CRF_SKIP_TYPE:
+                            if(!(item instanceof CrfSkipInstructionStepSurveyItem)) {
+                                throw new IllegalStateException("Error in json parsing, crf_heart_rate_camera_step types must be ActiveStepSurveyItem");
                             }
                             return createCrfSkipInstructionStep((CrfSkipInstructionStepSurveyItem) item);
                         case CrfSurveyItemAdapter.CRF_COUNTDOWN_SURVEY_ITEM_TYPE:
@@ -313,13 +320,12 @@ public class CrfTaskFactory extends TaskItemFactory {
 
     private void fillCrfSkipStep(CrfSkipInstructionStep step, CrfSkipInstructionStepSurveyItem item) {
         fillCrfInstructionStep(step, item);
-        if(item.identifier != null) {
+        if (item.identifier != null) {
             step.stepIdentifier = item.identifier;
         }
-        if(item.skipIdentifier != null) {
+        if (item.skipIdentifier != null) {
             step.skipIdentifier = item.skipIdentifier;
         }
-
     }
 
     private void fillCrfStartTaskStep(CrfStartTaskStep step, CrfStartTaskSurveyItem item) {
