@@ -38,6 +38,7 @@ import android.view.animation.Transformation;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import org.researchstack.backbone.answerformat.DecimalAnswerFormat;
@@ -77,6 +78,10 @@ import java.util.Locale;
 public class CrfHeartRateStepLayout extends ActiveStepLayout implements
         BpmRecorder.BpmUpdateListener,
         BpmRecorder.IntelligentStartUpdateListener,
+        BpmRecorder.CameraCoveredListener,
+        BpmRecorder.PressureListener,
+        BpmRecorder.DeclineHRListener,
+        BpmRecorder.AbnormalHRListener,
         RecorderListener,
         CrfTaskToolbarTintManipulator,
         CrfTaskStatusBarManipulator,
@@ -503,7 +508,7 @@ public class CrfHeartRateStepLayout extends ActiveStepLayout implements
     }
 
     @Override
-    public void pressureUpdate(PressureHolder pressure) {
+    public void pressureUpdate(BpmRecorder.PressureListener.PressureHolder pressure) {
         if(pressure.isPressureExcessive) {
             LOG.error("Too much pressure on the camera");
             showPressureStatus();
@@ -515,7 +520,7 @@ public class CrfHeartRateStepLayout extends ActiveStepLayout implements
     }
 
     @Override
-    public void cameraUpdate(CameraCoveredHolder camera) {
+    public void cameraUpdate(BpmRecorder.CameraCoveredListener.CameraCoveredHolder camera) {
         if(camera.isCameraCovered) {
             resetView();
             LOG.error("Camera is covered");
@@ -573,7 +578,7 @@ public class CrfHeartRateStepLayout extends ActiveStepLayout implements
     }
 
     @Override
-    public void abnormalHRUpdate(AbnormalHRHolder abnormal) {
+    public void abnormalHRUpdate(BpmRecorder.AbnormalHRListener.AbnormalHRHolder abnormal) {
         if(abnormal.isAbnormal) {
             StepResult<Boolean> abnormalHRResult = new StepResult<>(new Step("displaySurvey"));
             abnormalHRResult.setResult(false);
