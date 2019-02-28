@@ -290,12 +290,6 @@ public class CrfTaskFactory extends TaskItemFactory {
         if (item.mediaVolume) {
             step.mediaVolume = true;
         }
-        if (item.remindMeLater) {
-            step.remindMeLater = true;
-        }
-        else {
-            step.remindMeLater = false;
-        }
 
     }
 
@@ -325,6 +319,12 @@ public class CrfTaskFactory extends TaskItemFactory {
 
         if (item.skipIdentifier != null) {
             step.skipIdentifier = item.skipIdentifier;
+        }
+        if (item.remindMeLater) {
+            step.remindMeLater = true;
+        }
+        else {
+            step.remindMeLater = false;
         }
         /*if (item.previousStepIdentifier != null) {
             step.previousStepIdentifier = item.previousStepIdentifier;
