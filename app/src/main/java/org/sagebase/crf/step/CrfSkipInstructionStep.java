@@ -73,6 +73,11 @@ public class CrfSkipInstructionStep extends CrfInstructionStep
      */
     boolean continueMeasurement = false;
 
+    /**
+     * If true, the remind me later button will show, if false it will hide, defaults to true
+     */
+    public boolean remindMeLater;
+
 
     public CrfSkipInstructionStep(String identifier, String title) {
         super(identifier, title, null);

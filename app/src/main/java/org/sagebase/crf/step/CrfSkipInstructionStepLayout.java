@@ -22,6 +22,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import org.researchstack.backbone.factory.IntentFactory;
@@ -47,6 +48,7 @@ public class CrfSkipInstructionStepLayout extends CrfInstructionStepLayout imple
     protected TextView instructionViewTop;
     protected TextView instructionViewBottom;
     private static final String LOG_TAG = CrfSkipInstructionStepLayout.class.getCanonicalName();
+    protected Button remindMeLaterButton;
 
 
     public CrfSkipInstructionStepLayout(Context context) {
@@ -72,6 +74,8 @@ public class CrfSkipInstructionStepLayout extends CrfInstructionStepLayout imple
         this.crfSkipInstructionStep = (CrfSkipInstructionStep)step;
         this.instructionViewTop = findViewById(R.id.crf_instruction_text_top);
         this.instructionViewBottom = findViewById(R.id.crf_instruction_text_bottom);
+        this.remindMeLaterButton = findViewById(R.id.remind_me_later);
+
     }
 
     @Override
@@ -91,7 +95,7 @@ public class CrfSkipInstructionStepLayout extends CrfInstructionStepLayout imple
         }
 
         if (remindMeLaterButton != null) {
-            if (crfInstructionStep.remindMeLater) {
+            if (crfSkipInstructionStep.remindMeLater) {
                 remindMeLaterButton.setVisibility(View.VISIBLE);
                 remindMeLaterButton.setOnClickListener(new OnClickListener() {
                     @Override

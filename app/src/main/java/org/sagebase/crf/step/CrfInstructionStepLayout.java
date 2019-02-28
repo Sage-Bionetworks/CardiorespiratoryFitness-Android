@@ -61,7 +61,7 @@ public class CrfInstructionStepLayout extends InstructionStepLayout implements
     protected View rootInstructionLayout;
     protected ImageButton customButton;
     protected TextView customButtonText;
-    protected Button remindMeLaterButton;
+
 
     public CrfInstructionStepLayout(Context context) {
         super(context);
@@ -120,7 +120,6 @@ public class CrfInstructionStepLayout extends InstructionStepLayout implements
         rootInstructionLayout = findViewById(R.id.crf_root_instruction_layout);
         customButton = findViewById(R.id.cr_instruction_custom_button);
         customButtonText = findViewById(R.id.crf_instruction_custom_button_text);
-        remindMeLaterButton = findViewById(R.id.remind_me_later);
     }
 
     @Override
