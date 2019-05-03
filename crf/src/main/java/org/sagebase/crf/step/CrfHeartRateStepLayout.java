@@ -48,6 +48,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import org.researchstack.backbone.answerformat.DecimalAnswerFormat;
+import org.researchstack.backbone.answerformat.IntegerAnswerFormat;
+import org.researchstack.backbone.answerformat.TextAnswerFormat;
 import org.researchstack.backbone.result.Result;
 import org.researchstack.backbone.result.StepResult;
 import org.researchstack.backbone.result.TaskResult;
@@ -640,15 +642,19 @@ public class CrfHeartRateStepLayout extends ActiveStepLayout implements
     private void setVo2MaxResult(double vo2Max) {
         long roundedVo2Max = Math.round(vo2Max);
         String bpmStepId = CrfHeartRateStepLayout.VO2_MAX_VALUE_RESULT;
-        StepResult<String> result = new StepResult<>(new Step(bpmStepId));
-        result.setResult(String.valueOf(roundedVo2Max));
+        QuestionStep vo2MaxQuestion =
+                new QuestionStep(bpmStepId, bpmStepId, new IntegerAnswerFormat(0,100));
+        StepResult<Integer> result = new StepResult<>(vo2MaxQuestion);
+        result.setResult((int)roundedVo2Max);
         stepResult.setResultForIdentifier(bpmStepId, result);
 
         long low = roundedVo2Max - 3;
         long high = roundedVo2Max + 3;
         String range = low + " - " + high;
         String bpmRangeStepId = CrfHeartRateStepLayout.VO2_MAX_RANGE_RESULT;
-        StepResult<String> rangeResult = new StepResult<>(new Step(bpmRangeStepId));
+        QuestionStep vo2RangeQuestion =
+                new QuestionStep(bpmRangeStepId, bpmRangeStepId, new TextAnswerFormat());
+        StepResult<String> rangeResult = new StepResult<>(vo2RangeQuestion);
         rangeResult.setResult(range);
         stepResult.setResultForIdentifier(bpmRangeStepId, rangeResult);
 

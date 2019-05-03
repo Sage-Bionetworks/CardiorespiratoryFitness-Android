@@ -58,14 +58,19 @@ public class CrfTaskResultFactory {
      */
     @VisibleForTesting
     private static CrfTaskResult createFromTaskResult(TaskResult taskResult) {
+        List<CrfResult> stepHistory = new ArrayList<>();
+        List<CrfResult> asyncResults = new ArrayList<>();
+
+        if (taskResult != null) {
+            Map<String, StepResult> stepResults = taskResult.getResults();
+            for (StepResult stepResult : stepResults.values()) {
+                addResultsRecursively(stepResult, stepHistory, asyncResults);
+            }
+        }
+
         String identifier = taskResult.getIdentifier();
 
-        ImmutableList<CrfResult> asyncResults = ImmutableList.of();
-
-        List<CrfResult> resultList = transformToCrfResults(taskResult);
-        ImmutableList<CrfResult> stepHistory = ImmutableList.copyOf(resultList);
-
-        CrfTaskResult crfTaskResult = new CrfTaskResult(identifier, taskResult.getStartDate(), taskResult.getEndDate(), stepHistory, asyncResults);
+        CrfTaskResult crfTaskResult = new CrfTaskResult(identifier, taskResult.getStartDate(), taskResult.getEndDate(), ImmutableList.copyOf(stepHistory), ImmutableList.copyOf(asyncResults));
         return crfTaskResult;
     }
 
@@ -73,20 +78,8 @@ public class CrfTaskResultFactory {
     private CrfTaskResultFactory() {
     }
 
-    public static List<CrfResult> transformToCrfResults(TaskResult taskResult) {
-        List<CrfResult> resultList = new ArrayList<>();
 
-        if (taskResult != null) {
-            Map<String, StepResult> stepResults = taskResult.getResults();
-            for (StepResult stepResult : stepResults.values()) {
-                addResultsRecursively(stepResult, resultList);
-            }
-        }
-
-        return resultList;
-    }
-
-    private static boolean addResultsRecursively(StepResult stepResult, List<CrfResult> resultList) {
+    private static boolean addResultsRecursively(StepResult stepResult, List<CrfResult> resultList, List<CrfResult> asyncResults) {
         boolean wentDeeper = false;
         List<CrfResult> resultListToAdd = resultList;
 
@@ -110,7 +103,7 @@ public class CrfTaskResultFactory {
 
                     StepResult nestedStepResult = (StepResult) value;
                     if (!nestedStepResult.getResults().isEmpty()) {
-                        addResultsRecursively((StepResult) value, resultListToAdd);
+                        addResultsRecursively((StepResult) value, resultListToAdd, asyncResults);
                     }
                 } else if (value instanceof FileResult) {
                     FileResult fileResult = (FileResult) value;
@@ -119,7 +112,7 @@ public class CrfTaskResultFactory {
                             fileResult.getEndDate(),
                             fileResult.getContentType(),
                             fileResult.getFile().getPath());
-                    resultListToAdd.add(crfResult);
+                    asyncResults.add(crfResult);
                 }
             }
             if (stepResultMap.size() > 1) {
