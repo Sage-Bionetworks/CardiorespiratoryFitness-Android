@@ -17,9 +17,9 @@
 
 package org.sagebase.crf.step;
 
-import org.researchstack.backbone.step.FormStep;
-import org.researchstack.backbone.step.NavigationFormStep;
-import org.researchstack.backbone.step.QuestionStep;
+import org.sagebionetworks.researchstack.backbone.step.FormStep;
+import org.sagebionetworks.researchstack.backbone.step.NavigationFormStep;
+import org.sagebionetworks.researchstack.backbone.step.QuestionStep;
 
 import java.util.List;
 

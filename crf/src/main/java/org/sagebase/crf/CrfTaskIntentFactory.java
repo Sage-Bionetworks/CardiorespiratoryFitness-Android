@@ -20,7 +20,7 @@ package org.sagebase.crf;
 import android.content.Context;
 import android.content.Intent;
 
-import org.researchstack.backbone.factory.IntentFactory;
+import org.sagebionetworks.researchstack.backbone.factory.IntentFactory;
 import org.sagebase.crf.researchstack.CrfResourceManager;
 
 /**

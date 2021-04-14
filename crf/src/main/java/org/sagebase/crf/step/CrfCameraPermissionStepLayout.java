@@ -24,8 +24,8 @@ import android.os.Build;
 import androidx.core.content.ContextCompat;
 import android.view.View;
 
-import org.researchstack.backbone.ui.callbacks.ActivityCallback;
-import org.researchstack.backbone.ui.step.layout.StepPermissionRequest;
+import org.sagebionetworks.researchstack.backbone.ui.callbacks.ActivityCallback;
+import org.sagebionetworks.researchstack.backbone.ui.step.layout.StepPermissionRequest;
 
 public class CrfCameraPermissionStepLayout extends CrfInstructionStepLayout implements StepPermissionRequest {
 

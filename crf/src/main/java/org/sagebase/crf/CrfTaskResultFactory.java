@@ -22,11 +22,11 @@ import androidx.annotation.VisibleForTesting;
 
 import com.google.common.collect.ImmutableList;
 
-import org.researchstack.backbone.answerformat.AnswerFormat;
-import org.researchstack.backbone.result.FileResult;
-import org.researchstack.backbone.result.StepResult;
-import org.researchstack.backbone.result.TaskResult;
-import org.researchstack.backbone.ui.ViewTaskActivity;
+import org.sagebionetworks.researchstack.backbone.answerformat.AnswerFormat;
+import org.sagebionetworks.researchstack.backbone.result.FileResult;
+import org.sagebionetworks.researchstack.backbone.result.StepResult;
+import org.sagebionetworks.researchstack.backbone.result.TaskResult;
+import org.sagebionetworks.researchstack.backbone.ui.ViewTaskActivity;
 import org.sagebase.crf.result.CrfAnswerResult;
 import org.sagebase.crf.result.CrfCollectionResult;
 import org.sagebase.crf.result.CrfFileResult;

@@ -18,16 +18,16 @@
 package org.sagebase.crf.researchstack;
 
 import android.text.TextUtils;
-import org.researchstack.backbone.ResourceManager;
-import org.researchstack.backbone.ResourcePathManager;
-import org.researchstack.backbone.model.ConsentDocument;
-import org.researchstack.backbone.model.SchedulesAndTasksModel;
-import org.researchstack.backbone.model.TaskModel;
-import org.researchstack.backbone.onboarding.OnboardingManager;
-import org.researchstack.backbone.model.ConsentSectionModel;
-import org.researchstack.backbone.model.InclusionCriteriaModel;
-import org.researchstack.backbone.model.SectionModel;
-import org.researchstack.backbone.model.StudyOverviewModel;
+import org.sagebionetworks.researchstack.backbone.ResourceManager;
+import org.sagebionetworks.researchstack.backbone.ResourcePathManager;
+import org.sagebionetworks.researchstack.backbone.model.ConsentDocument;
+import org.sagebionetworks.researchstack.backbone.model.SchedulesAndTasksModel;
+import org.sagebionetworks.researchstack.backbone.model.TaskModel;
+import org.sagebionetworks.researchstack.backbone.onboarding.OnboardingManager;
+import org.sagebionetworks.researchstack.backbone.model.ConsentSectionModel;
+import org.sagebionetworks.researchstack.backbone.model.InclusionCriteriaModel;
+import org.sagebionetworks.researchstack.backbone.model.SectionModel;
+import org.sagebionetworks.researchstack.backbone.model.StudyOverviewModel;
 
 /**
  * Created by TheMDP on 12/12/16.

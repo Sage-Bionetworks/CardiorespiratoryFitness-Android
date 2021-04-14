@@ -25,9 +25,9 @@ import androidx.appcompat.app.ActionBar;
 import android.view.Menu;
 import android.view.ViewGroup;
 
-import org.researchstack.backbone.step.Step;
-import org.researchstack.backbone.ui.OnboardingTaskActivity;
-import org.researchstack.backbone.ui.step.layout.StepLayout;
+import org.sagebionetworks.researchstack.backbone.step.Step;
+import org.sagebionetworks.researchstack.backbone.ui.OnboardingTaskActivity;
+import org.sagebionetworks.researchstack.backbone.ui.step.layout.StepLayout;
 import org.sagebase.old.fitbit.FitbitManager;
 import org.sagebase.old.fitbit.OAuthDAO;
 import org.sagebase.old.step.CrfExternalIdStep;

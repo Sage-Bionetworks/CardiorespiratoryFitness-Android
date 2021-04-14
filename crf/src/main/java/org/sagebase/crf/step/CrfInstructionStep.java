@@ -18,7 +18,7 @@
 package org.sagebase.crf.step;
 
 
-import org.researchstack.backbone.step.InstructionStep;
+import org.sagebionetworks.researchstack.backbone.step.InstructionStep;
 
 /**
  * Created by TheMDP on 10/24/17.

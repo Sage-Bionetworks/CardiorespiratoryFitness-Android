@@ -39,12 +39,12 @@ import com.github.mikephil.charting.formatter.ValueFormatter;
 import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
 import com.github.mikephil.charting.utils.ViewPortHandler;
 
-import org.researchstack.backbone.ui.graph.BarChartCard;
-import org.researchstack.backbone.ui.graph.LineChartCard;
-import org.researchstack.backbone.ui.graph.PieChartCard;
-import org.researchstack.backbone.ui.graph.ProgressChartCard;
-import org.researchstack.backbone.utils.ThemeUtils;
-import org.researchstack.backbone.R;
+import org.sagebionetworks.researchstack.backbone.ui.graph.BarChartCard;
+import org.sagebionetworks.researchstack.backbone.ui.graph.LineChartCard;
+import org.sagebionetworks.researchstack.backbone.ui.graph.PieChartCard;
+import org.sagebionetworks.researchstack.backbone.ui.graph.ProgressChartCard;
+import org.sagebionetworks.researchstack.backbone.utils.ThemeUtils;
+import org.sagebionetworks.researchstack.backbone.R;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;

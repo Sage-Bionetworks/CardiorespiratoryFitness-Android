@@ -19,7 +19,7 @@ package org.sagebase.crf.step;
 
 import com.google.gson.annotations.SerializedName;
 
-import org.researchstack.backbone.model.survey.ActiveStepSurveyItem;
+import org.sagebionetworks.researchstack.backbone.model.survey.ActiveStepSurveyItem;
 
 public class CrfHeartRateSurveyItem extends ActiveStepSurveyItem {
 

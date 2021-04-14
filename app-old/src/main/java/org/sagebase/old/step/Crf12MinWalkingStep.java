@@ -17,9 +17,9 @@
 
 package org.sagebase.old.step;
 
-import org.researchstack.backbone.step.active.ActiveStep;
-import org.researchstack.backbone.step.active.recorder.LocationRecorderConfig;
-import org.researchstack.backbone.step.active.recorder.RecorderConfig;
+import org.sagebionetworks.researchstack.backbone.step.active.ActiveStep;
+import org.sagebionetworks.researchstack.backbone.step.active.recorder.LocationRecorderConfig;
+import org.sagebionetworks.researchstack.backbone.step.active.recorder.RecorderConfig;
 
 import java.util.ArrayList;
 import java.util.List;

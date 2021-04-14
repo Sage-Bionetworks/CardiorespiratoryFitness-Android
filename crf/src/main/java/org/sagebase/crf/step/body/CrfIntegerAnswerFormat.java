@@ -17,7 +17,7 @@
 
 package org.sagebase.crf.step.body;
 
-import org.researchstack.backbone.answerformat.IntegerAnswerFormat;
+import org.sagebionetworks.researchstack.backbone.answerformat.IntegerAnswerFormat;
 
 
 /**

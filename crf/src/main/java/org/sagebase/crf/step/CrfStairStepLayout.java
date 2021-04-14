@@ -26,9 +26,9 @@ import android.util.AttributeSet;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import org.researchstack.backbone.result.StepResult;
-import org.researchstack.backbone.step.Step;
-import org.researchstack.backbone.ui.step.layout.ActiveStepLayout;
+import org.sagebionetworks.researchstack.backbone.result.StepResult;
+import org.sagebionetworks.researchstack.backbone.step.Step;
+import org.sagebionetworks.researchstack.backbone.ui.step.layout.ActiveStepLayout;
 import org.sagebase.crf.R;
 import org.sagebase.crf.view.CrfTaskToolbarProgressManipulator;
 

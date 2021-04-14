@@ -34,7 +34,7 @@ import net.openid.appauth.AuthorizationService;
 import net.openid.appauth.AuthorizationServiceConfiguration;
 import net.openid.appauth.ResponseTypeValues;
 
-import org.researchstack.backbone.ui.MainActivity;
+import org.sagebionetworks.researchstack.backbone.ui.MainActivity;
 import org.sagebionetworks.bridge.android.manager.BridgeManagerProvider;
 import org.sagebionetworks.bridge.android.util.retrofit.RxUtils;
 import org.sagebionetworks.bridge.rest.model.OAuthAuthorizationToken;

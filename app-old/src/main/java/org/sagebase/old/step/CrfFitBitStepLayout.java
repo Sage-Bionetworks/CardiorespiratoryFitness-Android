@@ -28,10 +28,10 @@ import android.widget.FrameLayout;
 
 import com.google.common.collect.Sets;
 
-import org.researchstack.backbone.DataProvider;
-import org.researchstack.backbone.result.StepResult;
-import org.researchstack.backbone.step.Step;
-import org.researchstack.backbone.ui.views.SubmitBar;
+import org.sagebionetworks.researchstack.backbone.DataProvider;
+import org.sagebionetworks.researchstack.backbone.result.StepResult;
+import org.sagebionetworks.researchstack.backbone.step.Step;
+import org.sagebionetworks.researchstack.backbone.ui.views.SubmitBar;
 import org.sagebase.old.fitbit.FitbitManager;
 import org.sagebase.old.fitbit.OAuthDAO;
 import org.sagebase.crf.step.CrfInstructionStep;

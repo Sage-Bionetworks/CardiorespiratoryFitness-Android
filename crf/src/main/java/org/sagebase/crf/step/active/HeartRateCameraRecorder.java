@@ -25,9 +25,9 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.vision.MultiProcessor;
 
-import org.researchstack.backbone.step.Step;
-import org.researchstack.backbone.step.active.recorder.Recorder;
-import org.researchstack.backbone.step.active.recorder.RecorderListener;
+import org.sagebionetworks.researchstack.backbone.step.Step;
+import org.sagebionetworks.researchstack.backbone.step.active.recorder.Recorder;
+import org.sagebionetworks.researchstack.backbone.step.active.recorder.RecorderListener;
 import org.sagebase.crf.camera.CameraSource;
 import org.sagebase.crf.camera.CameraSourcePreview;
 import org.sagebase.crf.step.CrfHeartRateStepLayout;

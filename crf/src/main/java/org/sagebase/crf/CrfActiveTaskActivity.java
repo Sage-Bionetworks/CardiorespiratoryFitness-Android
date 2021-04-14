@@ -37,13 +37,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
-import org.researchstack.backbone.PermissionRequestManager;
-import org.researchstack.backbone.step.Step;
-import org.researchstack.backbone.task.OrderedTask;
-import org.researchstack.backbone.task.Task;
-import org.researchstack.backbone.ui.ActiveTaskActivity;
-import org.researchstack.backbone.ui.step.layout.ActiveStepLayout;
-import org.researchstack.backbone.ui.step.layout.StepLayout;
+import org.sagebionetworks.researchstack.backbone.PermissionRequestManager;
+import org.sagebionetworks.researchstack.backbone.step.Step;
+import org.sagebionetworks.researchstack.backbone.task.OrderedTask;
+import org.sagebionetworks.researchstack.backbone.task.Task;
+import org.sagebionetworks.researchstack.backbone.ui.ActiveTaskActivity;
+import org.sagebionetworks.researchstack.backbone.ui.step.layout.ActiveStepLayout;
+import org.sagebionetworks.researchstack.backbone.ui.step.layout.StepLayout;
 import org.sagebase.crf.step.CrfFormStep;
 import org.sagebase.crf.step.CrfResultListener;
 import org.sagebase.crf.view.CrfTaskStatusBarManipulator;
@@ -246,7 +246,7 @@ public class CrfActiveTaskActivity extends ActiveTaskActivity {
         // Allow for customization of the toolbar
         if (current instanceof CrfTaskToolbarActionManipulator) {
             CrfTaskToolbarActionManipulator manipulator = (CrfTaskToolbarActionManipulator) current;
-            if(item.getItemId() == org.researchstack.backbone.R.id.rsb_clear_menu_item) {
+            if(item.getItemId() == org.sagebionetworks.researchstack.backbone.R.id.rsb_clear_menu_item) {
                 return manipulator.crfToolbarRightIconClicked();
             }
         } else if(item.getItemId() == android.R.id.home) {

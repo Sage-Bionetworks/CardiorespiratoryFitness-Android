@@ -22,9 +22,9 @@ import android.os.Bundle;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.appcompat.app.AppCompatActivity;
 
-import org.researchstack.backbone.DataProvider;
-import org.researchstack.backbone.ResearchStack;
-import org.researchstack.backbone.onboarding.OnboardingTaskType;
+import org.sagebionetworks.researchstack.backbone.DataProvider;
+import org.sagebionetworks.researchstack.backbone.ResearchStack;
+import org.sagebionetworks.researchstack.backbone.onboarding.OnboardingTaskType;
 import org.sagebionetworks.research.crf.R;
 
 ;

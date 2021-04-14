@@ -1,2 +1,1 @@
-include ':backbone', ':crf', ':app'
-project(':backbone').projectDir = new File('BridgeAndroidSdk/ResearchStack/backbone')
+include ':crf', ':app'

@@ -20,7 +20,7 @@ package org.sagebionetworks.bridge.researchstack;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import org.junit.Test;
-import org.researchstack.backbone.model.survey.SurveyItem;
+import org.sagebionetworks.researchstack.backbone.model.survey.SurveyItem;
 import org.sagebase.crf.researchstack.CrfSurveyItemAdapter;
 
 import java.util.Map;

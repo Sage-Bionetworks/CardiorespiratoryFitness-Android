@@ -32,12 +32,9 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    
-    implementation project(':backbone'), {
-        exclude group: 'joda-time', module: 'joda-time'
-        exclude group: 'net.zetetic', module: 'android-database-sqlcipher'
-        exclude group: 'co.touchlab.squeaky'
-    }
+
+    // Dagger needs access to some RS classes
+    api "org.sagebionetworks.bridge:researchstack-sdk:$bridge_sdk_version"
 
     implementation 'com.github.tony19:logback-android-core:1.1.1-6'
     implementation 'com.github.tony19:logback-android-classic:1.1.1-6', {

@@ -17,7 +17,7 @@
 
 package org.sagebase.crf.step;
 
-import org.researchstack.backbone.result.TaskResult;
+import org.sagebionetworks.researchstack.backbone.result.TaskResult;
 
 /**
  * Created by TheMDP on 11/5/17.

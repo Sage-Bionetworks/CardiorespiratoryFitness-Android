@@ -8,8 +8,8 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import androidx.core.content.ContextCompat;
 
-import org.researchstack.backbone.AppPrefs;
-import org.researchstack.backbone.PermissionRequestManager;
+import org.sagebionetworks.researchstack.backbone.AppPrefs;
+import org.sagebionetworks.researchstack.backbone.PermissionRequestManager;
 
 import org.sagebionetworks.research.crf.R;
 

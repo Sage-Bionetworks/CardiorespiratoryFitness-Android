@@ -50,10 +50,10 @@ import android.view.TextureView;
 import com.google.android.gms.common.util.ArrayUtils;
 import com.google.common.collect.Sets;
 
-import org.researchstack.backbone.result.FileResult;
-import org.researchstack.backbone.step.Step;
-import org.researchstack.backbone.step.active.recorder.Recorder;
-import org.researchstack.backbone.step.active.recorder.RecorderListener;
+import org.sagebionetworks.researchstack.backbone.result.FileResult;
+import org.sagebionetworks.researchstack.backbone.step.Step;
+import org.sagebionetworks.researchstack.backbone.step.active.recorder.Recorder;
+import org.sagebionetworks.researchstack.backbone.step.active.recorder.RecorderListener;
 import org.sagebase.crf.step.CrfHeartRateStepLayout;
 import org.sagebase.crf.step.active.camera_error.CameraState;
 import org.sagebase.crf.step.active.confidence_error.ConfidenceState;

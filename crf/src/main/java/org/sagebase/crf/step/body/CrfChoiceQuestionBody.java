@@ -27,12 +27,12 @@ import android.widget.TextView;
 
 import org.sagebase.crf.R;
 
-import org.researchstack.backbone.answerformat.AnswerFormat;
-import org.researchstack.backbone.model.Choice;
-import org.researchstack.backbone.result.StepResult;
-import org.researchstack.backbone.step.Step;
-import org.researchstack.backbone.ui.step.body.BodyAnswer;
-import org.researchstack.backbone.ui.step.body.SingleChoiceQuestionBody;
+import org.sagebionetworks.researchstack.backbone.answerformat.AnswerFormat;
+import org.sagebionetworks.researchstack.backbone.model.Choice;
+import org.sagebionetworks.researchstack.backbone.result.StepResult;
+import org.sagebionetworks.researchstack.backbone.step.Step;
+import org.sagebionetworks.researchstack.backbone.ui.step.body.BodyAnswer;
+import org.sagebionetworks.researchstack.backbone.ui.step.body.SingleChoiceQuestionBody;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -185,7 +185,7 @@ public class CrfChoiceQuestionBody<T> extends SingleChoiceQuestionBody {
     public BodyAnswer getBodyAnswerState() {
         if (isMutlipleChoice()) {
             if (currentSelectedMultipleSet.isEmpty()) {
-                return new BodyAnswer(false, org.researchstack.backbone.R.string.rsb_invalid_answer_choice);
+                return new BodyAnswer(false, org.sagebionetworks.researchstack.backbone.R.string.rsb_invalid_answer_choice);
             } else {
                 return BodyAnswer.VALID;
             }

@@ -23,8 +23,8 @@ import androidx.annotation.VisibleForTesting;
 import org.joda.time.DateTime;
 import org.joda.time.Interval;
 import org.joda.time.LocalDate;
-import org.researchstack.backbone.model.SchedulesAndTasksModel;
-import org.researchstack.backbone.model.SchedulesAndTasksModel.ScheduleModel;
+import org.sagebionetworks.researchstack.backbone.model.SchedulesAndTasksModel;
+import org.sagebionetworks.researchstack.backbone.model.SchedulesAndTasksModel.ScheduleModel;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 

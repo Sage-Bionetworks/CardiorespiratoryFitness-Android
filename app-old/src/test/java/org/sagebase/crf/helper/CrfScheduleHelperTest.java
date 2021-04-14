@@ -21,7 +21,7 @@ import org.joda.time.DateTime;
 import org.joda.time.Interval;
 import org.junit.Before;
 import org.junit.Test;
-import org.researchstack.backbone.model.SchedulesAndTasksModel;
+import org.sagebionetworks.researchstack.backbone.model.SchedulesAndTasksModel;
 
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -31,7 +31,7 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static org.researchstack.backbone.model.SchedulesAndTasksModel.ScheduleModel;
+import static org.sagebionetworks.researchstack.backbone.model.SchedulesAndTasksModel.ScheduleModel;
 import static org.sagebase.old.helper.CrfScheduleHelper.isScheduledFor;
 
 public class CrfScheduleHelperTest {
