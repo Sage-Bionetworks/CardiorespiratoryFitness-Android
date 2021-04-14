@@ -17,7 +17,7 @@
 
 package org.sagebase.old.step;
 
-import android.support.annotation.LayoutRes;
+import androidx.annotation.LayoutRes;
 import android.text.InputType;
 
 import org.researchstack.backbone.answerformat.TextAnswerFormat;

@@ -20,7 +20,7 @@ package org.sagebase.crf.step;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Paint;
-import android.support.v4.content.res.ResourcesCompat;
+import androidx.core.content.res.ResourcesCompat;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.Button;
@@ -29,7 +29,6 @@ import android.widget.TextView;
 
 import org.researchstack.backbone.result.StepResult;
 import org.researchstack.backbone.step.Step;
-import org.researchstack.backbone.ui.callbacks.StepCallbacks;
 import org.researchstack.backbone.ui.step.layout.InstructionStepLayout;
 import org.researchstack.backbone.utils.ResUtils;
 import org.sagebase.crf.CrfActiveTaskActivity;

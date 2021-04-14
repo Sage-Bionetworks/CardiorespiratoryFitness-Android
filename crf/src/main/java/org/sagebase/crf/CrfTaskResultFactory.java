@@ -18,7 +18,7 @@
 package org.sagebase.crf;
 
 import android.content.Intent;
-import android.support.annotation.VisibleForTesting;
+import androidx.annotation.VisibleForTesting;
 
 import com.google.common.collect.ImmutableList;
 

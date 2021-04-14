@@ -35,7 +35,7 @@
         android:layout_marginTop="20dp"
         android:visibility="gone"/>
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/crf_text_container"
@@ -89,7 +89,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/crf_heart_rate_title"
             tools:layout_editor_absoluteX="24dp" />
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
         android:id="@+id/crf_your_hr_is"
@@ -246,7 +246,7 @@
         android:padding="@dimen/rsb_padding_medium"
         android:layout_marginTop="40dp"/>
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -310,6 +310,6 @@
             app:layout_constraintTop_toBottomOf="@+id/button_go_forward"
             />
 
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </RelativeLayout>

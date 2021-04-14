@@ -20,7 +20,7 @@ package org.sagebase.old.step;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.support.annotation.VisibleForTesting;
+import androidx.annotation.VisibleForTesting;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.View;

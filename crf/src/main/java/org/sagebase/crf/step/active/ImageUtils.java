@@ -19,12 +19,12 @@ package org.sagebase.crf.step.active;
 
 import android.graphics.Bitmap;
 import android.media.Image;
-import android.support.v8.renderscript.Allocation;
-import android.support.v8.renderscript.Element;
-import android.support.v8.renderscript.RenderScript;
-import android.support.v8.renderscript.Script;
-import android.support.v8.renderscript.ScriptIntrinsicYuvToRGB;
-import android.support.v8.renderscript.Type;
+import androidx.renderscript.Allocation;
+import androidx.renderscript.Element;
+import androidx.renderscript.RenderScript;
+import androidx.renderscript.Script;
+import androidx.renderscript.ScriptIntrinsicYuvToRGB;
+import androidx.renderscript.Type;
 
 import com.google.android.gms.vision.Frame;
 
@@ -32,9 +32,9 @@ import org.sagebionetworks.research.ScriptC_yuv420888;
 
 import java.nio.ByteBuffer;
 
-import static android.support.v8.renderscript.Element.RGBA_8888;
-import static android.support.v8.renderscript.Element.U8;
-import static android.support.v8.renderscript.Element.U8_4;
+import static androidx.renderscript.Element.RGBA_8888;
+import static androidx.renderscript.Element.U8;
+import static androidx.renderscript.Element.U8_4;
 
 /**
  * Created by liujoshua on 2/21/2018.

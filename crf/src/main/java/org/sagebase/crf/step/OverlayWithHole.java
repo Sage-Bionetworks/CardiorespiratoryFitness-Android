@@ -33,7 +33,7 @@ import org.sagebase.crf.R;
  * Created by liujoshua on 2/26/2018.
  */
 
-public class OverlayWithHole extends android.support.v7.widget.AppCompatImageView {
+public class OverlayWithHole extends androidx.appcompat.widget.AppCompatImageView {
     
     private RectF circleRect;
     private int radius;

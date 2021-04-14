@@ -18,7 +18,7 @@
 package org.sagebase.old.step;
 
 import android.content.Context;
-import android.support.annotation.LayoutRes;
+import androidx.annotation.LayoutRes;
 import android.util.AttributeSet;
 import android.widget.Button;
 

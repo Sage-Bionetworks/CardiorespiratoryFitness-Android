@@ -31,7 +31,7 @@
         android:layout_alignParentTop="true"
         android:layout_above="@+id/crf_next_button_container"
         >
-        <android.support.constraint.ConstraintLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -111,9 +111,9 @@
                     android:gravity="center_horizontal"/>
 
             </LinearLayout>
-        </android.support.constraint.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
-    <android.support.v7.widget.CardView
+    <androidx.cardview.widget.CardView
         android:id="@id/crf_next_button_container"
         android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
@@ -125,7 +125,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <android.support.v7.widget.AppCompatButton
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/learn_more"
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="match_parent"
@@ -161,6 +161,6 @@
                 android:textAllCaps="false"/>
 
         </LinearLayout>
-    </android.support.v7.widget.CardView>
+    </androidx.cardview.widget.CardView>
 
 </RelativeLayout>

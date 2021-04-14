@@ -23,8 +23,8 @@ import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.multidex.MultiDex;
-import android.support.v4.content.res.ResourcesCompat;
+import androidx.multidex.MultiDex;
+import androidx.core.content.res.ResourcesCompat;
 import android.util.Log;
 import android.view.View;
 

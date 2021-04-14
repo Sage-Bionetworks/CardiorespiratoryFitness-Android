@@ -17,18 +17,8 @@
 
 package org.sagebase.crf.step;
 
-import android.Manifest;
-import android.app.Application;
-import android.content.Context;
-import android.content.pm.PackageManager;
-import android.support.annotation.Nullable;
-import android.support.v4.content.ContextCompat;
-
-import org.researchstack.backbone.result.StepResult;
-import org.researchstack.backbone.result.TaskResult;
-import org.researchstack.backbone.task.NavigableOrderedTask;
-
-import java.util.List;
+import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 
 public class CrfCameraPermissionStep extends CrfInstructionStep {
 

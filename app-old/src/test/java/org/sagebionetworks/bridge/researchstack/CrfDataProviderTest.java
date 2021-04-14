@@ -21,8 +21,8 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Looper;
 import android.preference.PreferenceManager;
-import android.support.annotation.NonNull;
-import android.support.annotation.VisibleForTesting;
+import androidx.annotation.NonNull;
+import androidx.annotation.VisibleForTesting;
 
 import org.joda.time.DateTime;
 import org.junit.AfterClass;
