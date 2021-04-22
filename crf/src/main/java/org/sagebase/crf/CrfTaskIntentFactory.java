@@ -60,6 +60,19 @@ public class CrfTaskIntentFactory {
 
     /**
      * @param context application context
+     * @return Intent for launching Heart Snapshot activity
+     */
+    public static Intent getHeartRateSnapshotTaskIntent(Context context) {
+        return intentFactory.newTaskIntent(
+                context,
+                CrfActiveTaskActivity.class,
+                taskFactory.createTask(
+                        context,
+                        CrfResourceManager.HEART_RATE_SNAPSHOT_RESOURCE));
+    }
+
+    /**
+     * @param context application context
      * @return Intent for launching Stair Step activity
      */
     public static Intent getStairStepTaskIntent(Context context) {
