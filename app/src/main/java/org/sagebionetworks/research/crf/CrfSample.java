@@ -57,10 +57,6 @@ public class CrfSample extends AppCompatActivity {
         final String restingHrTaskTitle = "Resting Heart Rate";
         addTask(taskContainer, restingHrTaskIntent, restingHrTaskTitle);
 
-        final Intent stepHrTaskIntent = CrfTaskIntentFactory.getStairStepTaskIntent(this);
-        final String stepHrTaskTitle = "Heart Rate Recovery";
-        addTask(taskContainer, stepHrTaskIntent, stepHrTaskTitle);
-
         final Intent heartSnapshotTaskIntent = CrfTaskIntentFactory.getHeartRateSnapshotTaskIntent(this);
         final String snapshotTaskTitle = "Heart Snapshot";
         addTask(taskContainer, heartSnapshotTaskIntent, snapshotTaskTitle);

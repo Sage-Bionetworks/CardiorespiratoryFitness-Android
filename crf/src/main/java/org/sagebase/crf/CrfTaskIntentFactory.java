@@ -71,19 +71,6 @@ public class CrfTaskIntentFactory {
                         CrfResourceManager.HEART_RATE_SNAPSHOT_RESOURCE));
     }
 
-    /**
-     * @param context application context
-     * @return Intent for launching Stair Step activity
-     */
-    public static Intent getStairStepTaskIntent(Context context) {
-        return intentFactory.newTaskIntent(
-                context,
-                CrfActiveTaskActivity.class,
-                taskFactory.createTask(
-                        context,
-                        CrfResourceManager.STAIR_STEP_RESOURCE));
-    }
-
     private CrfTaskIntentFactory() {
     }
 }
