@@ -18,13 +18,22 @@
 package org.sagebase.crf.step;
 
 
+import org.sagebase.crf.CrfTaskIntentFactory;
+import org.sagebase.crf.CrfTaskResultFactory;
+import org.sagebionetworks.researchstack.backbone.result.StepResult;
+import org.sagebionetworks.researchstack.backbone.result.TaskResult;
 import org.sagebionetworks.researchstack.backbone.step.InstructionStep;
+import org.sagebionetworks.researchstack.backbone.task.NavigableOrderedTask;
+import org.sagebionetworks.researchstack.backbone.utils.StepResultHelper;
+
+import java.util.List;
 
 /**
  * Created by TheMDP on 10/24/17.
  */
 
-public class CrfInstructionStep extends InstructionStep {
+public class CrfInstructionStep extends InstructionStep
+        implements NavigableOrderedTask.NavigationSkipRule {
 
     /**
      * The type of button to show
@@ -107,4 +116,32 @@ public class CrfInstructionStep extends InstructionStep {
         return CrfInstructionStepLayout.class;
     }
 
+    @SuppressWarnings("rawtypes")
+    @Override
+    public boolean shouldSkipStep(TaskResult result, List<TaskResult> additionalTaskResults) {
+
+        // Custom logic for skipping gender and birthYear instruction step when there are
+        // already results for gender and birthYear provided from a pervious run
+        if ("instructionRecovery".equals(getIdentifier())) {
+            StepResult genderFormStepResult = StepResultHelper
+                    .findStepResult(result, CrfTaskIntentFactory.genderFormResultIdentifier);
+            StepResult birthYearFormStepResult = StepResultHelper
+                    .findStepResult(result, CrfTaskIntentFactory.birthYearFormResultIdentifier);
+
+            if (genderFormStepResult != null || birthYearFormStepResult != null) {
+                // Form answer is not null, let the user change their current answer
+                return false;
+            }
+
+            String genderResult = StepResultHelper.findStringResult(result,
+                    CrfTaskIntentFactory.genderResultIdentifier);
+            Integer birthYearResult = StepResultHelper.findIntegerResult(
+                    CrfTaskIntentFactory.birthYearResultIdentifier, result);
+
+            // Skip if we already have gender and birthYear as results
+            return genderResult != null && birthYearResult != null;
+        }
+
+        return false;
+    }
 }

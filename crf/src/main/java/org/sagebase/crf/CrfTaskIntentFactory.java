@@ -22,6 +22,11 @@ import android.content.Intent;
 
 import org.sagebionetworks.researchstack.backbone.factory.IntentFactory;
 import org.sagebase.crf.researchstack.CrfResourceManager;
+import org.sagebionetworks.researchstack.backbone.result.StepResult;
+import org.sagebionetworks.researchstack.backbone.result.TaskResult;
+import org.sagebionetworks.researchstack.backbone.step.Step;
+
+import static org.sagebase.crf.researchstack.CrfTaskFactory.TASK_ID_HEART_SNAPSHOT;
 
 /**
  * Creates Intents for launching Cardiorespiratory Fitness Module tasks.
@@ -31,6 +36,14 @@ public class CrfTaskIntentFactory {
             new org.sagebase.crf.researchstack.CrfTaskFactory();
 
     private static final IntentFactory intentFactory = IntentFactory.INSTANCE;
+
+    /**
+     * These need to match the identifiers in the Heart Snapshot JSON
+     */
+    public static final String genderResultIdentifier = "sex";
+    public static final String genderFormResultIdentifier = genderResultIdentifier + "Form";
+    public static final String birthYearResultIdentifier = "birthYear";
+    public static final String birthYearFormResultIdentifier = birthYearResultIdentifier + "Form";
 
     /**
      * @param context application context
@@ -70,6 +83,34 @@ public class CrfTaskIntentFactory {
                         context,
                         CrfResourceManager.HEART_RATE_SNAPSHOT_RESOURCE));
     }
+    /**
+     * @param context application context
+     * @param gender the previous answer to the gender question, so those questions are skipped
+     * @@param birthYear the previous answer to the gender question, so those questions are skipped
+     * @return Intent for launching Heart Snapshot activity
+     */
+    public static Intent getHeartRateSnapshotTaskIntent(Context context,
+                                                        String gender, int birthYear) {
+
+        TaskResult taskResult = new TaskResult(TASK_ID_HEART_SNAPSHOT);
+
+        StepResult<String> genderResult = new StepResult<>(new Step(genderResultIdentifier));
+        genderResult.setResult(gender);
+        taskResult.setStepResultForStepIdentifier(genderResultIdentifier, genderResult);
+
+        StepResult<Integer> birthYearResult = new StepResult<>(new Step(birthYearResultIdentifier));
+        birthYearResult.setResult(birthYear);
+        taskResult.setStepResultForStepIdentifier(birthYearResultIdentifier, birthYearResult);
+
+        return intentFactory.newTaskIntent(
+                context,
+                CrfActiveTaskActivity.class,
+                taskFactory.createTask(
+                        context,
+                        CrfResourceManager.HEART_RATE_SNAPSHOT_RESOURCE),
+                taskResult);
+    }
+
 
     private CrfTaskIntentFactory() {
     }

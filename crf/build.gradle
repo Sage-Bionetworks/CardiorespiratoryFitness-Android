@@ -33,7 +33,6 @@ android {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
 
-    // Dagger needs access to some RS classes
     api "org.sagebionetworks.bridge:researchstack-sdk:$bridge_sdk_version"
 
     implementation 'com.github.tony19:logback-android-core:1.1.1-6'

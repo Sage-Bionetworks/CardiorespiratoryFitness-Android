@@ -29,7 +29,7 @@
       "identifier"       : "instructionRecovery",
       "type"             : "crf_instruction",
       "text"             : "Recovery HR Questions",
-      "detailText"       : "To calculate your Recovery HR score, we first need to know a few things about you like your sex, and age.",
+      "detailText"       : "To calculate your Recovery HR score, we first need to know a few things about you like your gender and age.",
       "image"            : "crf_quiz",
       "scaleType"        : "CENTER_INSIDE",
       "buttonText"       : "Next",
@@ -38,10 +38,10 @@
     {
       "identifier": "sexForm",
       "type": "crf_form",
-      "title": "What is your sex?",
-      "learnMoreText"    : "Why are we asking about this?",
+      "title": "What is your gender?",
+      "learnMoreText"    : "Why are we asking about your gender?",
       "learnMoreFile"    : "crf_sex_at_birth.html",
-      "learnMoreTitle"   : "Why are we asking?",
+      "learnMoreTitle"   : "Why are we asking this?",
       "items": [
         {
           "identifier": "sex",
@@ -56,7 +56,7 @@
               "value": "female"
             },
             {
-              "text": "Other, or prefer not to answer",
+              "text": "Does not apply or prefer not to answer",
               "value": "other"
             }
           ]
@@ -64,7 +64,7 @@
       ]
     },
     {
-      "identifier": "birthdateForm",
+      "identifier": "birthYearForm",
       "type": "crf_form",
       "title": "What year were you born?",
       "items": [
