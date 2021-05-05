@@ -17,10 +17,20 @@
 
 package org.sagebase.crf.step;
 
+import android.Manifest;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+
+import androidx.core.content.ContextCompat;
 import androidx.core.content.res.ResourcesCompat;
+
+import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.os.Build;
+import android.provider.Settings;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
@@ -34,6 +44,8 @@ import org.sagebionetworks.researchstack.backbone.result.TaskResult;
 import org.sagebionetworks.researchstack.backbone.step.Step;
 import org.sagebionetworks.researchstack.backbone.task.Task;
 import org.sagebionetworks.researchstack.backbone.ui.ViewTaskActivity;
+import org.sagebionetworks.researchstack.backbone.ui.callbacks.ActivityCallback;
+import org.sagebionetworks.researchstack.backbone.ui.step.layout.StepPermissionRequest;
 import org.sagebionetworks.researchstack.backbone.utils.ResUtils;
 import org.sagebase.crf.CrfActivityResultListener;
 import org.sagebase.crf.CrfViewTaskActivity;
@@ -51,10 +63,12 @@ import static android.app.Activity.RESULT_OK;
  */
 
 public class CrfStartTaskStepLayout extends CrfInstructionStepLayout implements
-        CrfTaskToolbarProgressManipulator, CrfActivityResultListener {
+        CrfTaskToolbarProgressManipulator, CrfActivityResultListener, StepPermissionRequest {
 
     private static final String LOG_TAG = CrfStartTaskStepLayout.class.getCanonicalName();
     public static final int DAILY_REMINDER_REQUEST_CODE = 2398;
+
+    private ActivityCallback permissionCallback;
 
     private CrfStartTaskStep crfStartTaskStep;
     protected Button remindMeLaterButton;
@@ -93,6 +107,15 @@ public class CrfStartTaskStepLayout extends CrfInstructionStepLayout implements
             throw new IllegalStateException("CrfStartTaskStepLayout only works with CrfStartTaskStep");
         }
         this.crfStartTaskStep = (CrfStartTaskStep) step;
+    }
+
+    @Override
+    protected void onAttachedToWindow() {
+        super.onAttachedToWindow();
+
+        if (getContext() instanceof ActivityCallback) {
+            permissionCallback = (ActivityCallback) getContext();
+        }
     }
 
     @Override
@@ -175,5 +198,44 @@ public class CrfStartTaskStepLayout extends CrfInstructionStepLayout implements
             //TODO: Return reminder time to calling container to handle -nathaniel 03/21/19
 
         }
+    }
+
+    @Override
+    public void goForwardClicked(View v) {
+        if (hasCameraPermission()) {
+            super.goForwardClicked(v);
+        } else {
+            nextButton.setEnabled(false);
+            permissionCallback.onRequestPermission(Manifest.permission.CAMERA);
+        }
+    }
+
+    @Override
+    public void onUpdateForPermissionResult() {
+        if (hasCameraPermission()) {
+            goForwardClicked(nextButton);
+        } else {
+            new AlertDialog.Builder(getContext())
+                    .setTitle(R.string.crf_camera_permission_title)
+                    .setMessage(R.string.crf_camera_permission_error)
+            .setNegativeButton(R.string.crf_camera_permission_go_to_settings, (dialogInterface, i) -> {
+                Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
+                        Uri.fromParts("package", getContext().getPackageName(), null));
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                getContext().startActivity(intent);
+            })
+            .setPositiveButton(R.string.rsb_BUTTON_OK, null)
+            .show();
+        }
+        nextButton.setEnabled(true);
+    }
+
+    private boolean hasCameraPermission() {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M ||
+                ContextCompat.checkSelfPermission(getContext(), Manifest.permission.CAMERA) ==
+                        PackageManager.PERMISSION_GRANTED) {
+            return true;
+        }
+        return false;
     }
 }

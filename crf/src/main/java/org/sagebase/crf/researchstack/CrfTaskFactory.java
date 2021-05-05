@@ -66,10 +66,8 @@ import java.util.List;
 public class CrfTaskFactory extends TaskItemFactory {
 
     public static final String TASK_ID_HEART_RATE_MEASUREMENT = "Heart Rate Measurement";
-    public static final String TASK_ID_CARDIO_STRESS_TEST = "Cardio Stress Test";
     public static final String TASK_ID_HEART_RATE_TRAINING = "Heart Rate Training";
 
-    public static final String TASK_ID_CARDIO_12MT = "Cardio 12MT";
     public static final String TASK_ID_HEART_SNAPSHOT = "HeartSnapshot";
     public static final String TASK_ID_BACKGROUND_SURVEY = "Background Survey";
     public static final String TASK_ID_SETTINGS_SCREEN = "Settings Screen";

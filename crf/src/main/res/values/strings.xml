@@ -45,4 +45,8 @@
     <string name="crf_nicely_done">Nicely done!</string>
     <string name="crf_you_need">This is what you\'ll need</string>
 
+    <string name="crf_camera_permission_go_to_settings">Go to settings</string>
+    <string name="crf_camera_permission_title">Not Authorized</string>
+    <string name="crf_camera_permission_error">We use the camera to see your finger as blood goes through it so we can measure your heart beats.\n\nYou have not given this app permission to use the camera. You can enable access in your phone\'s settings.</string>
+
 </resources>
