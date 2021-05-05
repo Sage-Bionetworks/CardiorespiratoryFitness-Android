@@ -39,9 +39,9 @@
       "identifier": "sexForm",
       "type": "crf_form",
       "title": "What is your gender?",
-      "learnMoreText"    : "Why are we asking about your gender?",
+      "learnMoreText"    : "Why are we asking this?",
       "learnMoreFile"    : "crf_sex_at_birth.html",
-      "learnMoreTitle"   : "Why are we asking this?",
+      "learnMoreTitle"   : "Why are we asking about your gender?",
       "items": [
         {
           "identifier": "sex",
