@@ -2,9 +2,6 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/CRF.iml" filepath="$PROJECT_DIR$/.idea/modules/CRF.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/CRF.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/CRF.app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/crf/CRF.crf.iml" filepath="$PROJECT_DIR$/.idea/modules/crf/CRF.crf.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/CardiorespiratoryFitness-Android.iml" filepath="$PROJECT_DIR$/.idea/modules/CardiorespiratoryFitness-Android.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/CardiorespiratoryFitness-Android.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/CardiorespiratoryFitness-Android.app.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/crf/CardiorespiratoryFitness-Android.crf.iml" filepath="$PROJECT_DIR$/.idea/modules/crf/CardiorespiratoryFitness-Android.crf.iml" />
