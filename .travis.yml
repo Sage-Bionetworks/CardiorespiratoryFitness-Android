@@ -27,7 +27,7 @@ before_install:
 - git config --global user.name "Travis CI"
 - git config --global user.email "tcisagebio@sagebase.org"
 install:
-- gem install bundler
+- gem install bundler -v 1.17.2
 - bundle install
 before_script:
 - mkdir "$ANDROID_HOME/licenses" || true
