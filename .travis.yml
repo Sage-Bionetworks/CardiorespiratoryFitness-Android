@@ -9,6 +9,8 @@ android:
     - build-tools-29.0.3
     - android-29
     - android-28
+rvm:
+  - 2.7.2
 env:
   global:
     - export ANDROID_SDK_ROOT=$ANDROID_HOME
