@@ -21,6 +21,7 @@ branches:
   - "/^stable-.*$/"
 before_install:
 - rvm install 2.7.2
+- sudo apt-get install libc++-dev
 - echo -e "machine github.com\n  login $CI_USER_TOKEN" >> ~/.netrclicense
 - git config --global user.name "Travis CI"
 - git config --global user.email "tcisagebio@sagebase.org"
