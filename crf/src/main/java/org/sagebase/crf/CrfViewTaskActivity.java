@@ -17,7 +17,7 @@
 
 package org.sagebase.crf;
 
-import android.support.annotation.ColorRes;
+import androidx.annotation.ColorRes;
 
 
 /**

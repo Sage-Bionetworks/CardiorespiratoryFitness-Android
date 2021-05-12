@@ -17,8 +17,8 @@
 
 package org.sagebase.crf.step;
 
-import org.researchstack.backbone.step.active.CountdownStep;
-import org.researchstack.backbone.ui.step.layout.CountdownStepLayout;
+import org.sagebionetworks.researchstack.backbone.step.active.CountdownStep;
+import org.sagebionetworks.researchstack.backbone.ui.step.layout.CountdownStepLayout;
 
 /**
  * Created by TheMDP on 10/31/17.

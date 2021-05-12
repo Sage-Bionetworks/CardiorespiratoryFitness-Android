@@ -17,7 +17,7 @@
 
 package org.sagebase.old.step;
 
-import org.researchstack.backbone.answerformat.BooleanAnswerFormat;
+import org.sagebionetworks.researchstack.backbone.answerformat.BooleanAnswerFormat;
 import org.sagebase.crf.step.body.CrfChoiceQuestionBody;
 
 /**

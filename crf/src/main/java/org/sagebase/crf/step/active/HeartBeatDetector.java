@@ -19,7 +19,7 @@ package org.sagebase.crf.step.active;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.support.v8.renderscript.RenderScript;
+import androidx.renderscript.RenderScript;
 import android.util.SparseArray;
 
 import com.google.android.gms.vision.Detector;

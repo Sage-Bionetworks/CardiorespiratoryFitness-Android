@@ -19,9 +19,9 @@ package org.sagebase.crf.step.active;
 
 import android.os.Build;
 
-import org.researchstack.backbone.step.Step;
-import org.researchstack.backbone.step.active.recorder.Recorder;
-import org.researchstack.backbone.step.active.recorder.RecorderConfig;
+import org.sagebionetworks.researchstack.backbone.step.Step;
+import org.sagebionetworks.researchstack.backbone.step.active.recorder.Recorder;
+import org.sagebionetworks.researchstack.backbone.step.active.recorder.RecorderConfig;
 import org.sagebase.crf.camera.CameraSourcePreview;
 import org.sagebase.crf.step.CrfHeartRateStepLayout;
 

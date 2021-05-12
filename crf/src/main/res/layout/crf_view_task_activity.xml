@@ -36,7 +36,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"/>
 
-    <org.researchstack.backbone.ui.views.StepSwitcher
+    <org.sagebionetworks.researchstack.backbone.ui.views.StepSwitcher
         android:id="@+id/crf_active_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>

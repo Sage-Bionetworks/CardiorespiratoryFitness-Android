@@ -27,7 +27,7 @@
             android:name="org.sagebase.crf.step.CrfTrainingInfo"/>
 
         <service
-            android:name="org.researchstack.backbone.step.active.RecorderService"
+            android:name="org.sagebionetworks.researchstack.backbone.step.active.RecorderService"
             android:exported="false" />
     </application>
 

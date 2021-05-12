@@ -23,13 +23,13 @@ import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.multidex.MultiDex;
-import android.support.v4.content.res.ResourcesCompat;
+import androidx.multidex.MultiDex;
+import androidx.core.content.res.ResourcesCompat;
 import android.util.Log;
 import android.view.View;
 
-import org.researchstack.backbone.StorageAccess;
-import org.researchstack.backbone.ResearchStack;
+import org.sagebionetworks.researchstack.backbone.StorageAccess;
+import org.sagebionetworks.researchstack.backbone.ResearchStack;
 import org.sagebionetworks.bridge.android.BridgeApplication;
 import org.sagebionetworks.bridge.android.di.ApplicationModule;
 import org.sagebionetworks.bridge.android.manager.BridgeManagerProvider;

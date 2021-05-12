@@ -20,7 +20,7 @@
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
 
--dontwarn org.researchstack.backbone.storage.**
+-dontwarn org.sagebionetworks.researchstack.backbone.storage.**
 -dontwarn co.touchlab.**
 -dontwarn net.sqlcipher.**
 
@@ -31,11 +31,11 @@
 -dontwarn ch.qos.logback.core.net.*
 
 # RS
--keep class org.researchstack.backbone.step.Step { *; }
--keep class org.researchstack.backbone.result.StepResult { *; }
--keep class org.researchstack.backbone.result.TaskResult { *; }
--keep public class * implements org.researchstack.backbone.ui.step.layout.StepLayout { *; }
--keep public class * implements org.researchstack.backbone.ui.step.body.StepBody { *; }
+-keep class org.sagebionetworks.researchstack.backbone.step.Step { *; }
+-keep class org.sagebionetworks.researchstack.backbone.result.StepResult { *; }
+-keep class org.sagebionetworks.researchstack.backbone.result.TaskResult { *; }
+-keep public class * implements org.sagebionetworks.researchstack.backbone.ui.step.layout.StepLayout { *; }
+-keep public class * implements org.sagebionetworks.researchstack.backbone.ui.step.body.StepBody { *; }
 
 
 # RS / Squeaky

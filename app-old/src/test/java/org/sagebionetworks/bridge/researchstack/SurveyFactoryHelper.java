@@ -25,14 +25,14 @@ import com.google.gson.GsonBuilder;
 
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.researchstack.backbone.R;
-import org.researchstack.backbone.model.ConsentSection;
-import org.researchstack.backbone.model.ConsentSectionAdapter;
-import org.researchstack.backbone.model.survey.SurveyItem;
-import org.researchstack.backbone.model.survey.SurveyItemAdapter;
-import org.researchstack.backbone.model.taskitem.TaskItem;
-import org.researchstack.backbone.model.taskitem.TaskItemAdapter;
-import org.researchstack.backbone.onboarding.OnboardingManager;
+import org.sagebionetworks.researchstack.backbone.R;
+import org.sagebionetworks.researchstack.backbone.model.ConsentSection;
+import org.sagebionetworks.researchstack.backbone.model.ConsentSectionAdapter;
+import org.sagebionetworks.researchstack.backbone.model.survey.SurveyItem;
+import org.sagebionetworks.researchstack.backbone.model.survey.SurveyItemAdapter;
+import org.sagebionetworks.researchstack.backbone.model.taskitem.TaskItem;
+import org.sagebionetworks.researchstack.backbone.model.taskitem.TaskItemAdapter;
+import org.sagebionetworks.researchstack.backbone.onboarding.OnboardingManager;
 
 /**
  * Created by TheMDP on 1/6/17.

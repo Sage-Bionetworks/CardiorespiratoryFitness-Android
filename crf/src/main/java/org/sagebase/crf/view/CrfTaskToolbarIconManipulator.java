@@ -17,7 +17,7 @@
 
 package org.sagebase.crf.view;
 
-import android.support.annotation.DrawableRes;
+import androidx.annotation.DrawableRes;
 
 /**
  * Created by TheMDP on 10/31/17.

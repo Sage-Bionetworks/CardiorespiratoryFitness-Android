@@ -20,12 +20,12 @@ package org.sagebase.old;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.annotation.VisibleForTesting;
-import android.support.v4.content.res.ResourcesCompat;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.VisibleForTesting;
+import androidx.core.content.res.ResourcesCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
@@ -35,13 +35,13 @@ import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
 
 import org.joda.time.DateTime;
-import org.researchstack.backbone.DataProvider;
-import org.researchstack.backbone.model.SchedulesAndTasksModel;
-import org.researchstack.backbone.task.Task;
-import org.researchstack.backbone.ui.ViewTaskActivity;
-import org.researchstack.backbone.ui.adapter.TaskAdapter;
-import org.researchstack.backbone.ui.fragment.ActivitiesFragment;
-import org.researchstack.backbone.utils.LogExt;
+import org.sagebionetworks.researchstack.backbone.DataProvider;
+import org.sagebionetworks.researchstack.backbone.model.SchedulesAndTasksModel;
+import org.sagebionetworks.researchstack.backbone.task.Task;
+import org.sagebionetworks.researchstack.backbone.ui.ViewTaskActivity;
+import org.sagebionetworks.researchstack.backbone.ui.adapter.TaskAdapter;
+import org.sagebionetworks.researchstack.backbone.ui.fragment.ActivitiesFragment;
+import org.sagebionetworks.researchstack.backbone.utils.LogExt;
 import org.sagebase.crf.CrfActiveTaskActivity;
 import org.sagebase.crf.CrfViewTaskActivity;
 import org.sagebase.old.helper.CrfScheduleHelper;
@@ -244,7 +244,7 @@ public class CrfActivitiesFragment extends ActivitiesFragment implements CrfFilt
             }
         } else {
             Toast.makeText(getActivity(),
-                    org.researchstack.backbone.R.string.rsb_local_error_load_task,
+                    org.sagebionetworks.researchstack.backbone.R.string.rsb_local_error_load_task,
                     Toast.LENGTH_SHORT).show();
         }
     }

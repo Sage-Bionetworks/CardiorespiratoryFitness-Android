@@ -20,8 +20,8 @@ package org.sagebionetworks.research.crf;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,11 +33,20 @@ import android.widget.TextView;
 import org.sagebase.crf.CrfTaskIntentFactory;
 import org.sagebase.crf.CrfTaskResultFactory;
 import org.sagebase.crf.result.CrfTaskResult;
-
+import org.sagebionetworks.researchstack.backbone.result.StepResult;
+import org.sagebionetworks.researchstack.backbone.result.TaskResult;
+import org.sagebionetworks.researchstack.backbone.ui.ViewTaskActivity;
+import org.sagebionetworks.researchstack.backbone.utils.StepResultHelper;
 
 public class CrfSample extends AppCompatActivity {
 
     private static final int CRF_TASK_REQUEST_CODE = 1492;
+    private static Integer birthYear = null;
+    private static String gender = null;
+
+    private static final String trainingTaskTitle = "Heart Rate Training";
+    private static final String restingHrTaskTitle = "Resting Heart Rate";
+    private static final String snapshotTaskTitle = "Heart Snapshot";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,23 +58,12 @@ public class CrfSample extends AppCompatActivity {
 
         LinearLayout taskContainer = findViewById(R.id.crf_task_container);
 
-        final Intent trainingTaskIntent = CrfTaskIntentFactory.getHeartRateTrainingTaskIntent(this);
-        final String trainingTaskTitle = "Heart Rate Training";
-        addTask(taskContainer, trainingTaskIntent, trainingTaskTitle);
-
-        final Intent restingHrTaskIntent = CrfTaskIntentFactory.getHeartRateMeasurementTaskIntent(this);
-        final String restingHrTaskTitle = "Resting Heart Rate";
-        addTask(taskContainer, restingHrTaskIntent, restingHrTaskTitle);
-
-        final Intent stepHrTaskIntent = CrfTaskIntentFactory.getStairStepTaskIntent(this);
-        final String stepHrTaskTitle = "Heart Rate Recovery";
-        addTask(taskContainer, stepHrTaskIntent, stepHrTaskTitle);
-
-        // is this needed?
+        addTask(taskContainer, trainingTaskTitle);
+        addTask(taskContainer, restingHrTaskTitle);
+        addTask(taskContainer, snapshotTaskTitle);
     }
 
-    private void addTask(final ViewGroup taskContainer, final Intent taskIntent,
-                         final String taskTitle) {
+    private void addTask(final ViewGroup taskContainer, final String taskTitle) {
         View taskView = LayoutInflater.from(this).inflate(R.layout.crf_task, taskContainer, false);
         taskContainer.addView(taskView);
         Button taskButton = taskView.findViewById(R.id.button_start_task);
@@ -74,12 +72,31 @@ public class CrfSample extends AppCompatActivity {
         taskButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startTask(taskIntent);
+                startTask(taskTitle);
             }
         });
     }
 
-    private void startTask(final Intent taskIntent) {
+    private void startTask(final String taskTitle) {
+
+        Intent taskIntent = null;
+        switch (taskTitle) {
+            case trainingTaskTitle:
+                taskIntent =  CrfTaskIntentFactory.getHeartRateTrainingTaskIntent(this);
+                break;
+            case restingHrTaskTitle:
+                taskIntent = CrfTaskIntentFactory.getHeartRateMeasurementTaskIntent(this);
+                break;
+            case snapshotTaskTitle:
+                if (gender != null && birthYear != null) {
+                    taskIntent = CrfTaskIntentFactory
+                            .getHeartRateSnapshotTaskIntent(this, gender, birthYear);
+                } else {
+                    taskIntent = CrfTaskIntentFactory.getHeartRateSnapshotTaskIntent(this);
+                }
+                break;
+        }
+
         if (taskIntent != null) {
             startActivityForResult(taskIntent, CRF_TASK_REQUEST_CODE);
         }
@@ -88,6 +105,15 @@ public class CrfSample extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == Activity.RESULT_OK && requestCode == CRF_TASK_REQUEST_CODE) {
+
+            TaskResult taskResult =
+                    (TaskResult)data.getSerializableExtra(ViewTaskActivity.EXTRA_TASK_RESULT);
+
+            gender = StepResultHelper.findStringResult(taskResult,
+                    CrfTaskIntentFactory.genderResultIdentifier);
+            birthYear = StepResultHelper.findIntegerResult(
+                    CrfTaskIntentFactory.birthYearResultIdentifier, taskResult);
+
             CrfTaskResult crfTaskResult = CrfTaskResultFactory.create(data);
             Log.d("CrfSample", String.valueOf(crfTaskResult));
         } else {

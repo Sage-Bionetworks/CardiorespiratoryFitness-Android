@@ -19,8 +19,8 @@ package org.sagebionetworks.bridge.researchstack;
 
 import org.mockito.Matchers;
 import org.powermock.api.mockito.PowerMockito;
-import org.researchstack.backbone.ResourceManager;
-import org.researchstack.backbone.ResourcePathManager;
+import org.sagebionetworks.researchstack.backbone.ResourceManager;
+import org.sagebionetworks.researchstack.backbone.ResourcePathManager;
 
 import java.io.BufferedReader;
 import java.io.IOException;

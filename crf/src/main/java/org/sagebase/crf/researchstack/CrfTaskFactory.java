@@ -22,23 +22,23 @@ import android.content.Context;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-//import org.researchstack.backbone.ResourceManager;
-import org.researchstack.backbone.ResourcePathManager;
-import org.researchstack.backbone.answerformat.AnswerFormat;
-import org.researchstack.backbone.model.survey.ActiveStepSurveyItem;
-import org.researchstack.backbone.model.survey.ChoiceQuestionSurveyItem;
-import org.researchstack.backbone.model.survey.FormSurveyItem;
-import org.researchstack.backbone.model.survey.IntegerRangeSurveyItem;
-import org.researchstack.backbone.model.survey.QuestionSurveyItem;
-import org.researchstack.backbone.model.survey.SurveyItem;
-import org.researchstack.backbone.model.survey.factory.SurveyFactory;
-import org.researchstack.backbone.model.taskitem.TaskItem;
-import org.researchstack.backbone.model.taskitem.TaskItemAdapter;
-import org.researchstack.backbone.model.taskitem.factory.TaskItemFactory;
-import org.researchstack.backbone.step.QuestionStep;
-import org.researchstack.backbone.step.Step;
-import org.researchstack.backbone.step.active.ActiveStep;
-import org.researchstack.backbone.task.Task;
+//import org.sagebionetworks.researchstack.backbone.ResourceManager;
+import org.sagebionetworks.researchstack.backbone.ResourcePathManager;
+import org.sagebionetworks.researchstack.backbone.answerformat.AnswerFormat;
+import org.sagebionetworks.researchstack.backbone.model.survey.ActiveStepSurveyItem;
+import org.sagebionetworks.researchstack.backbone.model.survey.ChoiceQuestionSurveyItem;
+import org.sagebionetworks.researchstack.backbone.model.survey.FormSurveyItem;
+import org.sagebionetworks.researchstack.backbone.model.survey.IntegerRangeSurveyItem;
+import org.sagebionetworks.researchstack.backbone.model.survey.QuestionSurveyItem;
+import org.sagebionetworks.researchstack.backbone.model.survey.SurveyItem;
+import org.sagebionetworks.researchstack.backbone.model.survey.factory.SurveyFactory;
+import org.sagebionetworks.researchstack.backbone.model.taskitem.TaskItem;
+import org.sagebionetworks.researchstack.backbone.model.taskitem.TaskItemAdapter;
+import org.sagebionetworks.researchstack.backbone.model.taskitem.factory.TaskItemFactory;
+import org.sagebionetworks.researchstack.backbone.step.QuestionStep;
+import org.sagebionetworks.researchstack.backbone.step.Step;
+import org.sagebionetworks.researchstack.backbone.step.active.ActiveStep;
+import org.sagebionetworks.researchstack.backbone.task.Task;
 import org.sagebase.crf.CrfActiveTaskActivity;
 import org.sagebase.crf.step.CrfCameraPermissionStep;
 import org.sagebase.crf.step.CrfCompletionStep;
@@ -66,11 +66,9 @@ import java.util.List;
 public class CrfTaskFactory extends TaskItemFactory {
 
     public static final String TASK_ID_HEART_RATE_MEASUREMENT = "Heart Rate Measurement";
-    public static final String TASK_ID_CARDIO_STRESS_TEST = "Cardio Stress Test";
     public static final String TASK_ID_HEART_RATE_TRAINING = "Heart Rate Training";
 
-    public static final String TASK_ID_CARDIO_12MT = "Cardio 12MT";
-    public static final String TASK_ID_STAIR_STEP = "Cardio Stair Step";
+    public static final String TASK_ID_HEART_SNAPSHOT = "HeartSnapshot";
     public static final String TASK_ID_BACKGROUND_SURVEY = "Background Survey";
     public static final String TASK_ID_SETTINGS_SCREEN = "Settings Screen";
 

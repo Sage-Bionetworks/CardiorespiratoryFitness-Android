@@ -22,8 +22,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import org.researchstack.backbone.result.StepResult;
-import org.researchstack.backbone.step.Step;
+import org.sagebionetworks.researchstack.backbone.result.StepResult;
+import org.sagebionetworks.researchstack.backbone.step.Step;
 import org.sagebase.crf.step.CrfInstructionStep;
 import org.sagebase.crf.step.CrfInstructionStepLayout;
 import org.sagebionetworks.research.crf.R;

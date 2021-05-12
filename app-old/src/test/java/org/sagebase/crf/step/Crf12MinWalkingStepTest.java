@@ -18,9 +18,9 @@
 package org.sagebase.crf.step;
 
 import org.junit.Test;
-import org.researchstack.backbone.step.active.recorder.LocationRecorder;
-import org.researchstack.backbone.step.active.recorder.LocationRecorderConfig;
-import org.researchstack.backbone.step.active.recorder.RecorderConfig;
+import org.sagebionetworks.researchstack.backbone.step.active.recorder.LocationRecorder;
+import org.sagebionetworks.researchstack.backbone.step.active.recorder.LocationRecorderConfig;
+import org.sagebionetworks.researchstack.backbone.step.active.recorder.RecorderConfig;
 import org.sagebase.old.step.Crf12MinWalkingStep;
 
 import java.io.File;

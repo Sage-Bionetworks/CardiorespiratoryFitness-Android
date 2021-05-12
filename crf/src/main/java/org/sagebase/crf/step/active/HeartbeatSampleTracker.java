@@ -18,10 +18,10 @@
 package org.sagebase.crf.step.active;
 
 import android.os.Handler;
-import android.support.annotation.AnyThread;
-import android.support.annotation.MainThread;
-import android.support.annotation.UiThread;
-import android.support.annotation.WorkerThread;
+import androidx.annotation.AnyThread;
+import androidx.annotation.MainThread;
+import androidx.annotation.UiThread;
+import androidx.annotation.WorkerThread;
 
 import com.google.android.gms.vision.Detector;
 import com.google.android.gms.vision.Tracker;

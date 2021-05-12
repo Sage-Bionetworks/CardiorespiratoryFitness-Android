@@ -2,10 +2,10 @@ package org.sagebionetworks.bridge.researchstack;
 
 import android.content.Context;
 
-import org.researchstack.backbone.result.StepResult;
-import org.researchstack.backbone.step.Step;
-import org.researchstack.backbone.ActionItem;
-import org.researchstack.backbone.UiManager;
+import org.sagebionetworks.researchstack.backbone.result.StepResult;
+import org.sagebionetworks.researchstack.backbone.step.Step;
+import org.sagebionetworks.researchstack.backbone.ActionItem;
+import org.sagebionetworks.researchstack.backbone.UiManager;
 import org.sagebase.old.CrfActivitiesFragment;
 
 import java.util.ArrayList;
@@ -40,7 +40,7 @@ public class CrfUiManager extends UiManager {
 
     /**
      * @return List of ActionItems w/ Activity class items. The class items are then used to
-     * construct an intent for a MenuItem when {@link org.researchstack.backbone.ui.MainActivity#onCreateOptionsMenu}
+     * construct an intent for a MenuItem when {@link org.sagebionetworks.researchstack.backbone.ui.MainActivity#onCreateOptionsMenu}
      * is called
      */
     @Override

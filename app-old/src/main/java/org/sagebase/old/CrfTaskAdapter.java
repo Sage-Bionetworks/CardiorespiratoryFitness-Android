@@ -18,7 +18,7 @@
 package org.sagebase.old;
 
 import android.content.Context;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
@@ -30,10 +30,10 @@ import android.widget.TextView;
 import com.google.common.collect.Iterables;
 
 import org.joda.time.LocalDate;
-import org.researchstack.backbone.model.SchedulesAndTasksModel;
-import org.researchstack.backbone.model.SchedulesAndTasksModel.ScheduleModel;
-import org.researchstack.backbone.ui.adapter.TaskAdapter;
-import org.researchstack.backbone.utils.LogExt;
+import org.sagebionetworks.researchstack.backbone.model.SchedulesAndTasksModel;
+import org.sagebionetworks.researchstack.backbone.model.SchedulesAndTasksModel.ScheduleModel;
+import org.sagebionetworks.researchstack.backbone.ui.adapter.TaskAdapter;
+import org.sagebionetworks.researchstack.backbone.utils.LogExt;
 import org.sagebase.old.helper.CrfScheduleHelper;
 import org.sagebase.crf.researchstack.CrfTaskFactory;
 import org.sagebionetworks.research.crf.R;

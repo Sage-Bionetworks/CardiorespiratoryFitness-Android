@@ -18,16 +18,16 @@
 package org.sagebase.crf.researchstack;
 
 import android.text.TextUtils;
-import org.researchstack.backbone.ResourceManager;
-import org.researchstack.backbone.ResourcePathManager;
-import org.researchstack.backbone.model.ConsentDocument;
-import org.researchstack.backbone.model.SchedulesAndTasksModel;
-import org.researchstack.backbone.model.TaskModel;
-import org.researchstack.backbone.onboarding.OnboardingManager;
-import org.researchstack.backbone.model.ConsentSectionModel;
-import org.researchstack.backbone.model.InclusionCriteriaModel;
-import org.researchstack.backbone.model.SectionModel;
-import org.researchstack.backbone.model.StudyOverviewModel;
+import org.sagebionetworks.researchstack.backbone.ResourceManager;
+import org.sagebionetworks.researchstack.backbone.ResourcePathManager;
+import org.sagebionetworks.researchstack.backbone.model.ConsentDocument;
+import org.sagebionetworks.researchstack.backbone.model.SchedulesAndTasksModel;
+import org.sagebionetworks.researchstack.backbone.model.TaskModel;
+import org.sagebionetworks.researchstack.backbone.onboarding.OnboardingManager;
+import org.sagebionetworks.researchstack.backbone.model.ConsentSectionModel;
+import org.sagebionetworks.researchstack.backbone.model.InclusionCriteriaModel;
+import org.sagebionetworks.researchstack.backbone.model.SectionModel;
+import org.sagebionetworks.researchstack.backbone.model.StudyOverviewModel;
 
 /**
  * Created by TheMDP on 12/12/16.
@@ -46,6 +46,7 @@ public class CrfResourceManager extends ResourceManager {
     public static final String HEART_RATE_MEASUREMENT_TEST_RESOURCE = "heart_rate_measurement";
     public static final String HEART_RATE_VALIDATION_TEST_RESOURCE = "heart_rate_validation";
     public static final String HEART_RATE_TRAINING_TEST_RESOURCE = "heart_rate_training";
+    public static final String HEART_RATE_SNAPSHOT_RESOURCE = "heart_snapshot";
 
     public static final String CARDIO_STRESS_TEST_RESOURCE = "cardio_stress_test";
     public static final String CARDIO_12MT_WALK_RESOURCE = "12_minute_walk";
@@ -74,6 +75,7 @@ public class CrfResourceManager extends ResourceManager {
         addResource(HEART_RATE_MEASUREMENT_TEST_RESOURCE, new Resource(Resource.TYPE_JSON, BASE_PATH_JSON, HEART_RATE_MEASUREMENT_TEST_RESOURCE));
         addResource(HEART_RATE_VALIDATION_TEST_RESOURCE, new Resource(Resource.TYPE_JSON, BASE_PATH_JSON, HEART_RATE_VALIDATION_TEST_RESOURCE));
         addResource(HEART_RATE_TRAINING_TEST_RESOURCE, new Resource(Resource.TYPE_JSON, BASE_PATH_JSON, HEART_RATE_TRAINING_TEST_RESOURCE));
+        addResource(HEART_RATE_SNAPSHOT_RESOURCE, new Resource(Resource.TYPE_JSON, BASE_PATH_JSON, HEART_RATE_SNAPSHOT_RESOURCE));
 
         addResource(CARDIO_STRESS_TEST_RESOURCE, new Resource(Resource.TYPE_JSON, BASE_PATH_JSON, CARDIO_STRESS_TEST_RESOURCE));
 

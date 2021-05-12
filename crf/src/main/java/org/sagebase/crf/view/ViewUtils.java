@@ -20,7 +20,7 @@ package org.sagebase.crf.view;
 import android.app.Activity;
 import android.graphics.Color;
 import android.os.Build;
-import android.support.v4.content.res.ResourcesCompat;
+import androidx.core.content.res.ResourcesCompat;
 import android.view.View;
 
 import org.sagebase.crf.R;

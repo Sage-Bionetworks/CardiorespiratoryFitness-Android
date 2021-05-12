@@ -20,8 +20,8 @@ package org.sagebase.crf;
 import org.joda.time.DateTime;
 import org.junit.Before;
 import org.junit.Test;
-import org.researchstack.backbone.factory.IntentFactory;
-import org.researchstack.backbone.model.SchedulesAndTasksModel;
+import org.sagebionetworks.researchstack.backbone.factory.IntentFactory;
+import org.sagebionetworks.researchstack.backbone.model.SchedulesAndTasksModel;
 import org.sagebase.crf.researchstack.CrfTaskFactory;
 import org.sagebase.old.CrfActivitiesFragment;
 

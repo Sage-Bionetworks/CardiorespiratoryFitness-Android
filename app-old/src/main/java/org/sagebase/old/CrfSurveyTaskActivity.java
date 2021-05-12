@@ -17,7 +17,7 @@
 
 package org.sagebase.old;
 
-import org.researchstack.backbone.ui.ViewTaskActivity;
+import org.sagebionetworks.researchstack.backbone.ui.ViewTaskActivity;
 
 /**
  * Created by TheMDP on 11/20/17.
