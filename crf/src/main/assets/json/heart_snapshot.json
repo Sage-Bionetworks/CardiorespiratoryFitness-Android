@@ -125,7 +125,8 @@
       "identifier"       : "hr",
       "type"             : "crf_heart_rate_camera_step",
       "isHrRecoveryStep" : "true",
-      "duration"         : "60"
+      "duration"         : "60",
+      "shouldRecordVideo": false
     },
     {
       "identifier"       : "completion",

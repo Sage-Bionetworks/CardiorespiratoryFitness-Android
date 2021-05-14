@@ -284,8 +284,10 @@ public class CrfHeartRateStepLayout extends ActiveStepLayout implements
 
         HeartRateCameraRecorderConfig config =
                 new HeartRateCameraRecorderConfig(step.stepIdentifier);
-        cameraRecorder = config.recorderForStep(
-                cameraSourcePreview, activeStep, this, getOutputDirectory(getContext()));
+
+        cameraRecorder = config.recorderForStep(cameraSourcePreview, activeStep,
+                this, getOutputDirectory(getContext()), step.shouldRecordVideo);
+
         cameraRecorder.setRecorderListener(this);
 
         // camera1
