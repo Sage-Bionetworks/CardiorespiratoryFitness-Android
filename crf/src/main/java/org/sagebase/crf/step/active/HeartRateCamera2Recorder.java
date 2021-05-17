@@ -119,15 +119,17 @@ public class HeartRateCamera2Recorder extends Recorder {
     private final File mediaRecorderFile;
     private CameraCaptureSession cameraCaptureSession;
     private CameraManager manager;
-    
+    private boolean shouldRecordVideo;
     
     public HeartRateCamera2Recorder(String identifier, Step step, File outputDirectory,
-                                    CrfHeartRateStepLayout stepLayout) {
+                                    CrfHeartRateStepLayout stepLayout, boolean recordVideo) {
         super(identifier + "Video", step, outputDirectory);
         textureView = stepLayout.getCameraPreview();
     
         Context context = textureView.getContext();
-    
+
+        shouldRecordVideo = recordVideo;
+
         mediaRecorderFile = new File(getOutputDirectory(), uniqueFilename + ".mp4");
         subscriptions = new CompositeSubscription();
 
@@ -282,9 +284,12 @@ public class HeartRateCamera2Recorder extends Recorder {
         heartBeatJsonWriter.stop();
         subscriptions.unsubscribe();
 
+        if (!shouldRecordVideo && mediaRecorderFile.exists()) {
+            mediaRecorderFile.delete();
+        }
+
         //Check that the video file exists and has data before adding to results.
-        if (mediaRecorderFile.exists() && mediaRecorderFile.length() > 128) {
-            long length = mediaRecorderFile.length();
+        if (shouldRecordVideo && mediaRecorderFile.exists()) {
             FileResult fileResult = new FileResult(fileResultIdentifier(), mediaRecorderFile, MP4_CONTENT_TYPE);
             fileResult.setStartDate(startTime);
             fileResult.setEndDate(new Date());

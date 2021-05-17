@@ -290,6 +290,8 @@ public class CrfTaskFactory extends TaskItemFactory {
         }
 
         step.isHrRecoveryStep = item.isHrRecoveryStep;
+        step.shouldRecordVideo = item.shouldRecordVideo;
+
         return step;
     }
 

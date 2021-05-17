@@ -50,7 +50,7 @@ public class CrfHeartRateCameraStep extends ActiveStep {
 
 
     public boolean isHrRecoveryStep;
-
+    public boolean shouldRecordVideo;
 
     public CrfHeartRateCameraStep(String identifier, String title, String detailText) {
         super(identifier, title, detailText);

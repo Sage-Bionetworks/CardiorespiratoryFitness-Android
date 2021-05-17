@@ -25,4 +25,7 @@ public class CrfHeartRateSurveyItem extends ActiveStepSurveyItem {
 
     @SerializedName("isHrRecoveryStep")
     public boolean isHrRecoveryStep;
+
+    @SerializedName("shouldRecordVideo")
+    public boolean shouldRecordVideo;
 }
